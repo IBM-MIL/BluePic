@@ -21,10 +21,10 @@ class ObjectStorageClient {
      */
     var userId:String  // The userid associated with the Object Storage account.
     var password:String // The password for the userid.
-    var projectId:String
-    var authURL:String // The authentication URL; this is the URL that returns the auth token
+    var projectId:String    // The project unique identifier.
+    var authURL:String  // The authentication URL; this is the URL that returns the auth token
     var publicURL:String   // The endpoint that shall be used for all query and update operations.
-    var token:String?
+    var token:String?   // The authentication token returned from the Object Storage service.
     
     /**
      * Constructor for the class.
@@ -38,7 +38,8 @@ class ObjectStorageClient {
     }
     
     /**
-     * Gets authentication token from Object Storage service and stores it as an instance variable.
+     * Gets authentication token from Object Storage service and stores it as an instance variable. This method must
+     * be called before executing any of the othe instance methods of this class.
      */
     func authenticate(onSuccess: () -> Void, onFailure: (error: String) -> Void) {
         // Define NSURL and HTTP request type
@@ -62,17 +63,17 @@ class ObjectStorageClient {
                         return
                     }
                 }
-                onFailure(error: "Could not get authentication token from Object Storage server. No header with the token value was found!")
+                onFailure(error: "Could not get authentication token from Object Storage service. In the response, there was no header with the auth token value!")
             },
             onFailure: { (errorMsg) in
-                onFailure(error: "Could not get authentication token from Object Storage server: \(errorMsg)")
+                onFailure(error: "Could not get authentication token from Object Storage service: \(errorMsg)")
         })
     }
     
     /**
      * Creates a container on the Object Storage service.
      */
-    func createContainer(name: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
+    func createContainer(name: String, onSuccess: (name: String) -> Void, onFailure: (error: String) -> Void) {
         let nsURL = NSURL(string: "\(publicURL)/\(name)")!
         print("Container creation URL: \(nsURL)")
         let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
@@ -88,7 +89,7 @@ class ObjectStorageClient {
         })
     }
     
-    func configureContainerForWebHosting(name: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
+    func configureContainerForWebHosting(name: String, onSuccess: (name : String) -> Void, onFailure: (error: String) -> Void) {
         let nsURL = NSURL(string: "\(publicURL)/\(name)")!
         let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
         mutableURLRequest.HTTPMethod = "POST"
@@ -103,7 +104,7 @@ class ObjectStorageClient {
         })
     }
     
-    func configureContainerForPublicAccess(name: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
+    func configureContainerForPublicAccess(name: String, onSuccess: (name: String) -> Void, onFailure: (error: String) -> Void) {
         let nsURL = NSURL(string: "\(publicURL)/\(name)")!
         let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
         mutableURLRequest.HTTPMethod = "POST"
@@ -111,61 +112,69 @@ class ObjectStorageClient {
         mutableURLRequest.setValue(".r:*,.rlistings", forHTTPHeaderField: "X-Container-Read")
         self.executeCall(mutableURLRequest, successCodes: [204],
             onSuccess: { (headers) in
-                onSuccess()
+                onSuccess(name: name)
             },
             onFailure: { (errorMsg) in
                 onFailure(error: "Could not update configuration for container '\(name)': \(errorMsg)")
         })
     }
     
-    func executeCall(mutableURLRequest: NSMutableURLRequest, successCodes: [Int], onSuccess: (headers: [NSObject : AnyObject]?) -> Void, onFailure: (error: String) -> Void) {
-        // Fire off HTTP request
-        Alamofire.request(mutableURLRequest).responseJSON {response in
-            // Get http response status code
-            var statusCode:Int = 0
-            if let httpResponse = response.response {
-                statusCode = httpResponse.statusCode
-            }
-            
-            print("statusCode = \(statusCode)")
-            
-            let statusCodeIndex = successCodes.indexOf(statusCode)
-            if (statusCodeIndex != nil) {
-                var headers:[NSObject : AnyObject]? = nil
+    /**
+     * Convenience method for executing REST calls against the Object Storage service on Bluemix. All methods in this class
+     * levegare this method to avoid code duplication.
+     */
+    func executeCall(mutableURLRequest: NSMutableURLRequest, successCodes: [Int],
+        onSuccess: (headers: [NSObject : AnyObject]?) -> Void, onFailure: (error: String) -> Void) {
+            // Fire off HTTP request
+            Alamofire.request(mutableURLRequest).responseJSON {response in
+                // Get http response status code
+                var statusCode:Int = 0
                 if let httpResponse = response.response {
-                    headers = httpResponse.allHeaderFields
+                    statusCode = httpResponse.statusCode
                 }
-                onSuccess(headers: headers)
-                return
+                print("statusCode = \(statusCode)")
+                
+                let statusCodeIndex = successCodes.indexOf(statusCode)
+                if (statusCodeIndex != nil) {
+                    var headers:[NSObject : AnyObject]? = nil
+                    if let httpResponse = response.response {
+                        headers = httpResponse.allHeaderFields
+                    }
+                    onSuccess(headers: headers)
+                    return
+                }
+                
+                // If this code is getting executed, then an error occurred...
+                var errorMsg = "[No error info available]"
+                if let error = response.result.error {
+                    errorMsg = error.localizedDescription
+                }
+                print("REST method invocation failure: \(errorMsg)")
+                onFailure(error: errorMsg)
             }
-            
-            // If we are here, then something went wrong
-            var errorMsg = "[No error info available]"
-            if let error = response.result.error {
-                errorMsg = error.localizedDescription
-            }
-            onFailure(error: errorMsg)
-        }
     }
     
     /**
-     * http://stackoverflow.com/questions/8564833/ios-upload-image-and-text-using-http-post
+     * Uploads given UIImage object to the Object Storage service on Bluemix. Before doing so, this method creates a JPEG
+     * representation of the image using the least compression possible. The compression quality value can be changed if necessary.
      */
-    func uploadImage(containerName: String, imageName: String, image: UIImage, onSuccess: (imageURL: String) -> Void, onFailure: (error: String) -> Void) {
-        let imageData = UIImageJPEGRepresentation(image, 1.0);
-        let imageURL = "\(publicURL)/\(containerName)/\(imageName)"
-        let nsURL = NSURL(string: imageURL)!
-        let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
-        mutableURLRequest.HTTPMethod = "PUT"
-        mutableURLRequest.setValue(token, forHTTPHeaderField: "X-Auth-Token")
-        mutableURLRequest.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
-        mutableURLRequest.HTTPBody = imageData
-        self.executeCall(mutableURLRequest, successCodes: [201],
-            onSuccess: { (headers) in
-                onSuccess(imageURL: imageURL)
-            },
-            onFailure: { (errorMsg) in
-                onFailure(error: "Could not upload image to container: \(errorMsg)")
-        })
+    func uploadImage(containerName: String, imageName: String, image: UIImage,
+        onSuccess: (imageURL: String) -> Void, onFailure: (error: String) -> Void) {
+            // http://stackoverflow.com/questions/8564833/ios-upload-image-and-text-using-http-post
+            let imageData = UIImageJPEGRepresentation(image, 1.0);
+            let imageURL = "\(publicURL)/\(containerName)/\(imageName)"
+            let nsURL = NSURL(string: imageURL)!
+            let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
+            mutableURLRequest.HTTPMethod = "PUT"
+            mutableURLRequest.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+            mutableURLRequest.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+            mutableURLRequest.HTTPBody = imageData
+            self.executeCall(mutableURLRequest, successCodes: [201],
+                onSuccess: { (headers) in
+                    onSuccess(imageURL: imageURL)
+                },
+                onFailure: { (errorMsg) in
+                    onFailure(error: "Could not upload image to container: \(errorMsg)")
+            })
     }
 }
