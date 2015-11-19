@@ -37,9 +37,14 @@
                BlueprintName = "BluePicTests"
                ReferencedContainer = "container:BluePic.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "BluePicTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "347472A81BFA8C6A0018B7F6"
