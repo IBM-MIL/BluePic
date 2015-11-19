@@ -47,7 +47,7 @@ class ObjectStorageClientTests: XCTestCase {
     func testCreateContainer() {
         let testName = "testCreateContainer"
         authenticate(testName, onSuccess: {
-            let containerName = "androidContainer2"
+            let containerName = "androidContainer4"
             self.objectStorageClient.createContainer(containerName, onSuccess: {
                 print("\(testName) succeeded.")
                 self.xctExpectation?.fulfill()

@@ -93,26 +93,13 @@ class ObjectStorageClient {
         mutableURLRequest.HTTPMethod = "PUT"
         mutableURLRequest.setValue(token, forHTTPHeaderField: "X-Auth-Token")
         mutableURLRequest.setValue("0", forHTTPHeaderField: "Content-Length")
-        
-        // Fire off HTTP PUT request
-        Alamofire.request(mutableURLRequest).responseJSON {response in
-            // Get http response status code
-            var statusCode:Int = 0
-            if let httpResponse = response.response {
-                statusCode = httpResponse.statusCode
-            }
-            print("statusCode = \(statusCode)")
-            if (statusCode == 201 || statusCode == 202) {
+        self.executeCall(mutableURLRequest, successCodes: [201, 202],
+            onSuccess: { (headers) in
                 self.configureContainerForWebHosting(name, onSuccess: onSuccess, onFailure: onFailure)
-                return
-            }
-            
-            var errorMsg = "[No error info available]"
-            if let error = response.result.error {
-                errorMsg = error.localizedDescription
-            }
-            onFailure(error: "Could not create container '\(name)': \(errorMsg)")
-        }
+            },
+            onFailure: { (errorMsg) in
+                onFailure(error: "Could not create container '\(name)': \(errorMsg)")
+        })
     }
     
     func configureContainerForWebHosting(name: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
@@ -121,27 +108,13 @@ class ObjectStorageClient {
         mutableURLRequest.HTTPMethod = "POST"
         mutableURLRequest.setValue(token, forHTTPHeaderField: "X-Auth-Token")
         mutableURLRequest.setValue("true", forHTTPHeaderField: "X-Container-Meta-Web-Listings")
-        
-        // Fire off HTTP request
-        Alamofire.request(mutableURLRequest).responseJSON {response in
-            // Get http response status code
-            var statusCode:Int = 0
-            if let httpResponse = response.response {
-                statusCode = httpResponse.statusCode
-            }
-            print("statusCode = \(statusCode)")
-            if (statusCode == 204) {
+        self.executeCall(mutableURLRequest, successCodes: [204],
+            onSuccess: { (headers) in
                 self.configureContainerForPublicAccess(name, onSuccess: onSuccess, onFailure: onFailure)
-                return
-            }
-            
-            var errorMsg = "[No error info available]"
-            if let error = response.result.error {
-                errorMsg = error.localizedDescription
-            }
-            onFailure(error: "Could not change configuration for container '\(name)': \(errorMsg)")
-        }
-        
+            },
+            onFailure: { (errorMsg) in
+                onFailure(error: "Could not update configuration for container '\(name)': \(errorMsg)")
+        })
     }
     
     func configureContainerForPublicAccess(name: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
@@ -150,29 +123,16 @@ class ObjectStorageClient {
         mutableURLRequest.HTTPMethod = "POST"
         mutableURLRequest.setValue(token, forHTTPHeaderField: "X-Auth-Token")
         mutableURLRequest.setValue(".r:*,.rlistings", forHTTPHeaderField: "X-Container-Read")
-        
-        // Fire off HTTP request
-        Alamofire.request(mutableURLRequest).responseJSON {response in
-            // Get http response status code
-            var statusCode:Int = 0
-            if let httpResponse = response.response {
-                statusCode = httpResponse.statusCode
-            }
-            print("statusCode = \(statusCode)")
-            if (statusCode == 204) {
+        self.executeCall(mutableURLRequest, successCodes: [204],
+            onSuccess: { (headers) in
                 onSuccess()
-                return
-            }
-            
-            var errorMsg = "[No error info available]"
-            if let error = response.result.error {
-                errorMsg = error.localizedDescription
-            }
-            onFailure(error: "Could not change configuration for container '\(name)': \(errorMsg)")
-        }
+            },
+            onFailure: { (errorMsg) in
+                onFailure(error: "Could not update configuration for container '\(name)': \(errorMsg)")
+        })
     }
     
-    func executeCall(mutableURLRequest: NSMutableURLRequest, successCodes: [Int], onSuccess: () -> Void, onFailure: (error: String) -> Void) {
+    func executeCall(mutableURLRequest: NSMutableURLRequest, successCodes: [Int], onSuccess: (headers: [NSObject : AnyObject]?) -> Void, onFailure: (error: String) -> Void) {
         // Fire off HTTP request
         Alamofire.request(mutableURLRequest).responseJSON {response in
             // Get http response status code
@@ -185,7 +145,11 @@ class ObjectStorageClient {
             
             let statusCodeIndex = successCodes.indexOf(statusCode)
             if (statusCodeIndex != nil) {
-                onSuccess()
+                var headers:[NSObject : AnyObject]? = nil
+                if let httpResponse = response.response {
+                    headers = httpResponse.allHeaderFields
+                }
+                onSuccess(headers: headers)
                 return
             }
             
