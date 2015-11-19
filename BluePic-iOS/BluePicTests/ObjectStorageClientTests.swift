@@ -41,7 +41,6 @@ class ObjectStorageClientTests: XCTestCase {
             print("\(testName) succeeded.")
             self.xctExpectation?.fulfill()
         })
-        
         self.waitForExpectationsWithTimeout(20.0, handler:nil)
     }
     
@@ -61,6 +60,10 @@ class ObjectStorageClientTests: XCTestCase {
         })
         self.waitForExpectationsWithTimeout(50.0, handler:nil)
     }
+    
+//    func testUploadImage() {
+//         self.xctExpectation?.fulfill()
+//    }
     
     /**
      * Convenience method for authenticating.
