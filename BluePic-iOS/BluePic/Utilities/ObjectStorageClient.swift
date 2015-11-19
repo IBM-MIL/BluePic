@@ -24,6 +24,7 @@ class ObjectStorageClient {
     var projectId:String
     var authURL:String // The authentication URL; this is the URL that returns the auth token
     var publicURL:String   // The endpoint that shall be used for all query and update operations.
+    var token:String?
     
     /**
     * Constructor for the class.
@@ -39,6 +40,55 @@ class ObjectStorageClient {
     /**
      * Gets authentication token from Object Storage service.
      */
+    func authenticate(onSuccess: () -> Void, onFailure: (error: String) -> Void) {
+        // Define NSURL and HTTP request type
+        let nsURL = NSURL(string: authURL)!
+        let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
+        mutableURLRequest.HTTPMethod = "POST"
+        mutableURLRequest.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+        let jsonPayload = "{ \"auth\": { \"identity\": { \"methods\": [ \"password\" ], \"password\": { \"user\": { \"id\": \"\(userId)\", \"password\": \"\(password)\" } } }, \"scope\": { \"project\": { \"id\": \"\(projectId)\" } } } }"
+        
+        print("jsonPayload = \(jsonPayload)")
+        mutableURLRequest.HTTPBody = jsonPayload.dataUsingEncoding(NSUTF8StringEncoding)
+        //mutableURLRequest.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonPayload, options: NSJSONWritingOptions())
+        
+        // Fire off HTTP POST request
+        Alamofire.request(mutableURLRequest).responseJSON {response in
+            // Get http response status code
+            var statusCode:Int = 0
+            if let httpResponse = response.response {
+                statusCode = httpResponse.statusCode
+            }
+            print("statusCode = \(statusCode)")
+            
+            if (statusCode == 201) {
+                if let httpResponse = response.response {
+                    let headers = httpResponse.allHeaderFields
+                    if let authToken = headers["X-Subject-Token"] as? String {
+                        self.token = authToken
+                        print("Auth token: \(authToken)")
+                        onSuccess()
+                        return
+                    }
+                }
+            }
+            
+            // Getting authorization token failed...
+            var errorMsg = "[No error info available]"
+            if let error = response.result.error {
+                errorMsg = error.localizedDescription
+            }
+            
+            onFailure(error: "Could not get authentication token from Object Storage server: \(errorMsg)")
+        }
+        
+        
+        
+        
+    
+    }
+    
+   /*
     func getAuthToken(onSuccess: (token: String) -> Void, onFailure: (error: String) -> Void) {
         // Define NSURL and HTTP request type
         let nsURL = NSURL(string: authURL)!
@@ -80,12 +130,13 @@ class ObjectStorageClient {
             onFailure(error: "Could not get authentication token from Object Storage server: \(errorMsg)")
         }
     }
+*/
     
     //curl -i $publicURL/steven -X PUT -H "Content-Length: 0" -H "X-Auth-Token: $token"
     /**
     * Creates a container on the Object Storage service.
     */
-    func createContainer(name: String, token: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
+    func createContainer(name: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
         let nsURL = NSURL(string: "\(publicURL)/\(name)")!
         print("Container creation URL: \(nsURL)")
         let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
@@ -102,7 +153,7 @@ class ObjectStorageClient {
             }
             print("statusCode = \(statusCode)")
             if (statusCode == 201 || statusCode == 202) {
-                self.configureContainerForWebHosting(name, token: token, onSuccess: onSuccess, onFailure: onFailure)
+                self.configureContainerForWebHosting(name, onSuccess: onSuccess, onFailure: onFailure)
                 return
             }
             
@@ -114,7 +165,7 @@ class ObjectStorageClient {
         }
     }
     
-    func configureContainerForWebHosting(name: String, token: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
+    func configureContainerForWebHosting(name: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
         let nsURL = NSURL(string: "\(publicURL)/\(name)")!
         let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
         mutableURLRequest.HTTPMethod = "POST"
@@ -130,7 +181,7 @@ class ObjectStorageClient {
             }
             print("statusCode = \(statusCode)")
             if (statusCode == 204) {
-                self.configureContainerForPublicAccess(name, token: token, onSuccess: onSuccess, onFailure: onFailure)
+                self.configureContainerForPublicAccess(name, onSuccess: onSuccess, onFailure: onFailure)
                 return
             }
             
@@ -143,7 +194,7 @@ class ObjectStorageClient {
         
     }
     
-    func configureContainerForPublicAccess(name: String, token: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
+    func configureContainerForPublicAccess(name: String, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
         let nsURL = NSURL(string: "\(publicURL)/\(name)")!
         let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
         mutableURLRequest.HTTPMethod = "POST"
@@ -171,7 +222,7 @@ class ObjectStorageClient {
         }
     }
     
-    func uploadFile() {
-        
-    }
+    //    func uploadFile(containerName: String, file: String, ) {
+    //
+    //    }
 }

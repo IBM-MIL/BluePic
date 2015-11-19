@@ -35,9 +35,9 @@ class ObjectStorageClientTests: XCTestCase {
         xctExpectation = nil
     }
     
-    func testGetAuthToken() {
-        let testName = "testGetAuthToken"
-        getAuthToken(testName, onSuccess: {token in
+    func testAuthenticate() {
+        let testName = "testAuthenticate"
+        authenticate(testName, onSuccess: {
             print("\(testName) succeeded.")
             self.xctExpectation?.fulfill()
         })
@@ -47,9 +47,9 @@ class ObjectStorageClientTests: XCTestCase {
     
     func testCreateContainer() {
         let testName = "testCreateContainer"
-        getAuthToken(testName, onSuccess: {token in
-            let containerName = "androidContainer"
-            self.objectStorageClient.createContainer(containerName, token: token, onSuccess: {
+        authenticate(testName, onSuccess: {
+            let containerName = "androidContainer2"
+            self.objectStorageClient.createContainer(containerName, onSuccess: {
                 print("\(testName) succeeded.")
                 self.xctExpectation?.fulfill()
                 }, onFailure: { (error) in
@@ -59,19 +59,15 @@ class ObjectStorageClientTests: XCTestCase {
                     self.xctExpectation?.fulfill()
             })
         })
-        
         self.waitForExpectationsWithTimeout(50.0, handler:nil)
-        
     }
     
     /**
-     * Convenience method for getting auth token.
+     * Convenience method for authenticating.
      */
-    func getAuthToken(testName: String, onSuccess: (token: String) -> Void) {
-        objectStorageClient.getAuthToken({(token) in
-            print("token: \(token)")
-            XCTAssertNotNil(token)
-            onSuccess(token: token)
+    func authenticate(testName: String, onSuccess: () -> Void) {
+        objectStorageClient.authenticate({() in
+            onSuccess()
             }, onFailure: {(error) in
                 print("\(testName) failed!")
                 print("error: \(error)")
