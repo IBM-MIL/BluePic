@@ -20,6 +20,7 @@ class ObjectStorageClientTests: XCTestCase {
         super.setUp()
         
         // Set up connection properties for Object Storage service on Bluemix
+        // TODO: Extract properties to a config plist file
         let password = "***REMOVED***"
         let userId = "***REMOVED***"
         let projectId = "***REMOVED***"
