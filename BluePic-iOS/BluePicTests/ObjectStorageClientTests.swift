@@ -13,7 +13,7 @@ class ObjectStorageClientTests: XCTestCase {
     
     var objectStorageClient: ObjectStorageClient!
     var xctExpectation:XCTestExpectation?
-    let containerName = "olivieri-container"
+    let containerName = "test-container"
     let publicURL = "***REMOVED***"
     
     override func setUp() {

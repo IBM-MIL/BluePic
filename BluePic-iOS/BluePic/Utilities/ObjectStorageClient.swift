@@ -71,7 +71,12 @@ class ObjectStorageClient {
     }
     
     /**
-     * Creates a container on the Object Storage service.
+     * Creates a container on the Object Storage service. The name of the container should be the facebook userID
+     * of the logged on user.
+     * 
+     * @param name The name for the container. For BluePic, this should be the facebook userID.
+     * @param onSuccess Closure that should be invoked upon succcessful completion.
+     * @param onFailure Closure that should be invoked upon failure.
      */
     func createContainer(name: String, onSuccess: (name: String) -> Void, onFailure: (error: String) -> Void) {
         let nsURL = NSURL(string: "\(publicURL)/\(name)")!
