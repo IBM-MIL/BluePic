@@ -52,18 +52,9 @@ class ObjectStorageClient {
         mutableURLRequest.HTTPBody = jsonPayload.dataUsingEncoding(NSUTF8StringEncoding)
         //mutableURLRequest.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonPayload, options: NSJSONWritingOptions())
         
-        // Fire off HTTP POST request
-        Alamofire.request(mutableURLRequest).responseJSON {response in
-            // Get http response status code
-            var statusCode:Int = 0
-            if let httpResponse = response.response {
-                statusCode = httpResponse.statusCode
-            }
-            print("statusCode = \(statusCode)")
-            
-            if (statusCode == 201) {
-                if let httpResponse = response.response {
-                    let headers = httpResponse.allHeaderFields
+        self.executeCall(mutableURLRequest, successCodes: [201],
+            onSuccess: { (responseHeaders) in
+                if let headers = responseHeaders {
                     if let authToken = headers["X-Subject-Token"] as? String {
                         self.token = authToken
                         print("Auth token: \(authToken)")
@@ -71,16 +62,11 @@ class ObjectStorageClient {
                         return
                     }
                 }
-            }
-            
-            // Getting authorization token failed...
-            var errorMsg = "[No error info available]"
-            if let error = response.result.error {
-                errorMsg = error.localizedDescription
-            }
-            
-            onFailure(error: "Could not get authentication token from Object Storage server: \(errorMsg)")
-        }
+                onFailure(error: "Could not get authentication token from Object Storage server. No header with the token value was found!")
+            },
+            onFailure: { (errorMsg) in
+                onFailure(error: "Could not get authentication token from Object Storage server: \(errorMsg)")
+        })
     }
     
     /**
