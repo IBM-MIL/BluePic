@@ -13,6 +13,7 @@ class ObjectStorageClientTests: XCTestCase {
     
     var objectStorageClient: ObjectStorageClient!
     var xctExpectation:XCTestExpectation?
+    let containerName = "olivieri-container"
     
     override func setUp() {
         super.setUp()
@@ -47,8 +48,7 @@ class ObjectStorageClientTests: XCTestCase {
     func testCreateContainer() {
         let testName = "testCreateContainer"
         authenticate(testName, onSuccess: {
-            let containerName = "androidContainer4"
-            self.objectStorageClient.createContainer(containerName, onSuccess: {
+            self.objectStorageClient.createContainer(self.containerName, onSuccess: {
                 print("\(testName) succeeded.")
                 self.xctExpectation?.fulfill()
                 }, onFailure: { (error) in
@@ -61,9 +61,22 @@ class ObjectStorageClientTests: XCTestCase {
         self.waitForExpectationsWithTimeout(50.0, handler:nil)
     }
     
-//    func testUploadImage() {
-//         self.xctExpectation?.fulfill()
-//    }
+    func testUploadImage() {
+        let testName = "testUploadImage"
+        authenticate(testName, onSuccess: {
+            let imageName = "the-image.jpeg"
+            let image = UIImage(named : "hatch-logo")
+            self.objectStorageClient.uploadImage(self.containerName, imageName: imageName, image: image!, onSuccess: {
+                print("\(testName) succeeded.")
+                self.xctExpectation?.fulfill()
+                }, onFailure: { (error) in
+                    print("\(testName) failed!")
+                    print("error: \(error)")
+                    XCTFail(error)
+                    self.xctExpectation?.fulfill()
+            })
+        })
+        self.waitForExpectationsWithTimeout(50.0, handler:nil)    }
     
     /**
      * Convenience method for authenticating.

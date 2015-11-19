@@ -148,45 +148,23 @@ class ObjectStorageClient {
         }
     }
     
-    /*
-    curl -i ***REMOVED***/olivieri/helloworld.txt -X PUT -H "Content-Length: 1" -H "Content-Type: text/html; charset=UTF-8" -H "X-Auth-Token: gAAAAABWTT6dUSYHOTnRjHverEK5yZfcfs3aNUBudgRQ8YtffaIMMrFE_PlzvKEAkKVhGLyI10CDQ-51Ogj-YuCKCwx3HTl_WIDwsRTozbiWXCrfdG8Drm9Tc7k9YGxHbwW9_Ax5M28okL63WfoL8p9Mq-arG34PScxanNweCL-fu4WVXR6DS9Q%3D"
-    */
-    
-    /*
-    func uploadImage(containerName: String, imageName: String, image: NSData) {
-    
-    let nsURL = NSURL(string: "\(publicURL)/\(containerName)/\(imageName)")!
-    let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
-    mutableURLRequest.HTTPMethod = "PUT"
-    mutableURLRequest.setValue(token, forHTTPHeaderField: "X-Auth-Token")
-    mutableURLRequest.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
-    
-    
-    
-    //var image = UIImage(named : "logo.png")
-    //var imageData = UIImagePNGRepresentation(image!)
-    
-    /*
-    
-    
-    
-    ar request = NSMutableURLRequest(URL: NSURL(string:"http:www.example.com/uploadpic")!)
-          var session = NSURLSession.sharedSession()
-      request.HTTPMethod = "POST"
-    var boundary = NSString(format: "---------------------------14737809831466499882746641449")
-          var contentType = NSString(format: "multipart/form-data; boundary=%@",boundary)
-                request.addValue(contentType as String, forHTTPHeaderField: "Content-Type")
-                var body = NSMutableData.alloc()
-    body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
-    body.appendData(NSString(format:"Content-Disposition: form-data; name=\"profile_photo\"; filename=\"img.jpg\"\\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
-    body.appendData(NSString(format: "Content-Type: application/octet-stream\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)     body.appendData(imageData)
-    body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
-    
-    request.HTTPBody = body
-    var returnData = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
-    var returnString = NSString(data: returnData!, encoding: NSUTF8StringEncoding)
-    println("returnString \(returnString)")*/
-    
+    /**
+     * http://stackoverflow.com/questions/8564833/ios-upload-image-and-text-using-http-post
+     */
+    func uploadImage(containerName: String, imageName: String, image: UIImage, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
+        let imageData = UIImageJPEGRepresentation(image, 1.0);
+        let nsURL = NSURL(string: "\(publicURL)/\(containerName)/\(imageName)")!
+        let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
+        mutableURLRequest.HTTPMethod = "PUT"
+        mutableURLRequest.setValue(token, forHTTPHeaderField: "X-Auth-Token")
+        mutableURLRequest.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+        mutableURLRequest.HTTPBody = imageData
+        self.executeCall(mutableURLRequest, successCodes: [201],
+            onSuccess: { (headers) in
+                onSuccess()
+            },
+            onFailure: { (errorMsg) in
+                onFailure(error: "Could not upload image to container: \(errorMsg)")
+        })
     }
-    */
 }
