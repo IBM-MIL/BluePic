@@ -151,9 +151,10 @@ class ObjectStorageClient {
     /**
      * http://stackoverflow.com/questions/8564833/ios-upload-image-and-text-using-http-post
      */
-    func uploadImage(containerName: String, imageName: String, image: UIImage, onSuccess: () -> Void, onFailure: (error: String) -> Void) {
+    func uploadImage(containerName: String, imageName: String, image: UIImage, onSuccess: (imageURL: String) -> Void, onFailure: (error: String) -> Void) {
         let imageData = UIImageJPEGRepresentation(image, 1.0);
-        let nsURL = NSURL(string: "\(publicURL)/\(containerName)/\(imageName)")!
+        let imageURL = "\(publicURL)/\(containerName)/\(imageName)"
+        let nsURL = NSURL(string: imageURL)!
         let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
         mutableURLRequest.HTTPMethod = "PUT"
         mutableURLRequest.setValue(token, forHTTPHeaderField: "X-Auth-Token")
@@ -161,7 +162,7 @@ class ObjectStorageClient {
         mutableURLRequest.HTTPBody = imageData
         self.executeCall(mutableURLRequest, successCodes: [201],
             onSuccess: { (headers) in
-                onSuccess()
+                onSuccess(imageURL: imageURL)
             },
             onFailure: { (errorMsg) in
                 onFailure(error: "Could not upload image to container: \(errorMsg)")

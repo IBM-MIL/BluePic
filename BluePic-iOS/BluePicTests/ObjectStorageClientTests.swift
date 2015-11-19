@@ -66,9 +66,12 @@ class ObjectStorageClientTests: XCTestCase {
         authenticate(testName, onSuccess: {
             let imageName = "the-image.jpeg"
             let image = UIImage(named : "hatch-logo")
-            self.objectStorageClient.uploadImage(self.containerName, imageName: imageName, image: image!, onSuccess: {
-                print("\(testName) succeeded.")
-                self.xctExpectation?.fulfill()
+            self.objectStorageClient.uploadImage(self.containerName, imageName: imageName, image: image!,
+                onSuccess: { (imageURL: String) in
+                    print("\(testName) succeeded.")
+                    XCTAssertNotNil(imageURL)
+                    print("imageURL: \(imageURL)")
+                    self.xctExpectation?.fulfill()
                 }, onFailure: { (error) in
                     print("\(testName) failed!")
                     print("error: \(error)")
