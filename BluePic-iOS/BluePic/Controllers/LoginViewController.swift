@@ -22,31 +22,27 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var welcomeLabel: UILabel!
     
     
+    //var cSync:CloudantSyncClient!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Test to prove Alamofire is working
-        Alamofire.request(.GET, "https://httpbin.org/get")
-
-        //Test code to see if CDTDatastore works
-        do {
-            let fileManager = NSFileManager.defaultManager()
-            
-            let documentsDir = fileManager.URLsForDirectory(.DocumentDirectory,
-                inDomains: .UserDomainMask).last!
-            
-            let storeURL = documentsDir.URLByAppendingPathComponent("cloudant-sync-datastore")
-            let path = storeURL.path
-            
-            let manager = try CDTDatastoreManager(directory: path)
-            let datastore = try manager.datastoreNamed("my_datastore")
-            
-            // Create a document
-            let rev = CDTDocumentRevision(docId: "doc1")
-        } catch {
-            print("Encountered an error: \(error)")
-        }
-        
+//        //Test code to see if CDTDatastore works
+//        let key = "***REMOVED***"
+//        let pass = "***REMOVED***"
+//        let dbName = "my_db"
+//        let username = "***REMOVED***"
+//        cSync = CloudantSyncClient(apiKey: key, apiPassword: pass, dbName: dbName, username: username)
+//        //First do a pull to make sure datastore is up to date
+//        cSync.pullFromRemoteDatabase()
+//        //Check if doc with fb id exists
+//        if(!cSync.doesExist("1234"))
+//        {
+//            //Create profile document locally
+//            cSync.createProfileDoc("1234", name: "Rolando Asmat")
+//            //Push new profile document to remote database
+//            cSync.pushToRemoteDatabase()
+//        }
         
         
     }
