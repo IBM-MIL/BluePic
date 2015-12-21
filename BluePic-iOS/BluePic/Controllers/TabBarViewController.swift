@@ -195,12 +195,12 @@ class TabBarViewController: UITabBarController {
         let alert = UIAlertController(title: nil, message: NSLocalizedString("Oops! An error occurred uploading to Object Storage.", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: ""), style: .Default, handler: { (action: UIAlertAction!) in
-           CameraDataManager.SharedInstance.uploadPhotosIfThereAreAnyLeftInTheQueue()
+
+            self.viewModel.tellCameraDataManagerToUploadPhotosIfThereAreAnyLeftInTheQueue()
         }))
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: { (action: UIAlertAction!) in
-            
-            CameraDataManager.SharedInstance.cancelUploadingPictureToObjectStorage()
+            self.viewModel.tellCameraDataManagerToCancelUploadingPictureToObjectStorage()
             
         }))
         
