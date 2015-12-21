@@ -87,7 +87,14 @@ To Begin, click on your BluePic application in the Application section of your B
 
 #### Cloudant NoSQL DB (marked 1 above)
 
-* cdt_username: "username" from corresponding credentials section, see Figure 6.
+* cdt_username: Open the credentials drop down by clicking "Show Credentials". This is the Red square of Figure 6.You should see the following: 
+
+<p align="center">
+<img src="img/keys.PNG"  alt="Drawing" width=500 border=0 /></p>
+<p align="center">Figure 5. keys.plist located in the BluePic-iOS/BluePic/Configuration directory.</p>
+
+Copy the “username” credential and store it in the cdt_username field.
+
 * cdt_db\_name: Create a dabatase from the Cloudant Dashboard and put the name of created database here.  
 * cdt_key: Generate an API KEY from the Cloudant Dashboard by clicking "Generate API Key" in the permissions tab of any database. Make sure to add Writer and Replicator permissions as well. Note the displayed password.
 * cdt_pass: Enter the password of the API Key here.
