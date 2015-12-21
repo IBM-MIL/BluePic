@@ -1,8 +1,18 @@
-/*
-Licensed Materials - Property of IBM
-© Copyright IBM Corporation 2015. All Rights Reserved.
-*/
-
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import UIKit
 
@@ -14,6 +24,12 @@ enum FeedViewModelNotification {
     
     //called when in the view did appear of the tab vc
     case StartLoadingAnimationForAppLaunch
+    
+    //called when a photo is uploading to object storage
+    case UploadingPhotoStarted
+    
+    //called when a photo is finished uploading to object storage
+    case UploadingPhotoFinished
 }
 
 class FeedViewModel: NSObject {
@@ -36,6 +52,9 @@ class FeedViewModel: NSObject {
     //constant that represents the height of the info view in the collection view cell that shows the photos caption and photographer name
     let kCollectionViewCellInfoViewHeight : CGFloat = 76
     
+    //constant that represents the height of the picture upload queue image feed collection view cell
+    let kPictureUploadCollectionViewCellHeight : CGFloat = 60
+    
     //constant that represents the limit of how tall a collection view cell's height can be
     let kCollectionViewCellHeightLimit : CGFloat = 480
     
@@ -46,7 +65,7 @@ class FeedViewModel: NSObject {
     let kNumberOfCellsWhenUserHasNoPhotos = 1
     
     //constant that defines the number of sections there are in the collection view
-    let kNumberOfSectionsInCollectionView = 1
+    let kNumberOfSectionsInCollectionView = 2
     
     
     /**
@@ -78,10 +97,18 @@ class FeedViewModel: NSObject {
             getPictureObjects()
         }
         else if(dataManagerNotification == DataManagerNotification.UserDecidedToPostPhoto){
+            self.passFeedViewModelNotificationToFeedVCCallback(feedViewModelNotification: FeedViewModelNotification.UploadingPhotoStarted)
             getPictureObjects()
         }
         else if(dataManagerNotification == DataManagerNotification.StartLoadingAnimationForAppLaunch){
             self.passFeedViewModelNotificationToFeedVCCallback(feedViewModelNotification: FeedViewModelNotification.StartLoadingAnimationForAppLaunch)
+        }
+        else if(dataManagerNotification == DataManagerNotification.UserCanceledUploadingPhotos){
+            getPictureObjects()
+        }
+        else if(dataManagerNotification == DataManagerNotification.ObjectStorageUploadImageAndCloudantCreatePictureDocSuccess){
+            self.passFeedViewModelNotificationToFeedVCCallback(feedViewModelNotification: FeedViewModelNotification.UploadingPhotoFinished)
+            getPictureObjects()
         }
     }
 
@@ -107,7 +134,7 @@ class FeedViewModel: NSObject {
      Method synchronously asks cloudant for new data. It sets the pictureDataArray to be a combination of the local pictureUploadQueue images + images receives from cloudant/objectDataStore
      */
     func getPictureObjects(){
-        pictureDataArray = CameraDataManager.SharedInstance.pictureUploadQueue + CloudantSyncDataManager.SharedInstance!.getPictureObjects(nil)
+        pictureDataArray = CloudantSyncDataManager.SharedInstance!.getPictureObjects(nil)
         hasRecievedDataFromCloudant = true
 
          dispatch_async(dispatch_get_main_queue()) {
@@ -134,14 +161,21 @@ class FeedViewModel: NSObject {
      - returns: Int
      */
     func numberOfItemsInSection(section : Int) -> Int {
-        
-        if(pictureDataArray.count == 0 && hasRecievedDataFromCloudant == true){
-            return kNumberOfCellsWhenUserHasNoPhotos
+        //if the section is 0, then it depends on how many items are in the picture upload queue
+        if(section == 0){
+            return CameraDataManager.SharedInstance.pictureUploadQueue.count
         }
+        // if the section is 1, then it depends how many items are in the pictureDataArray
         else{
-            return pictureDataArray.count
+            if(pictureDataArray.count == 0 && hasRecievedDataFromCloudant == true){
+                return kNumberOfCellsWhenUserHasNoPhotos
+            }
+            else{
+                return pictureDataArray.count
+            }
         }
     }
+    
     
     
     /**
@@ -154,30 +188,41 @@ class FeedViewModel: NSObject {
      */
     func sizeForItemAtIndexPath(indexPath : NSIndexPath, collectionView : UICollectionView) -> CGSize {
         
-        if(pictureDataArray.count == 0){
-            
-            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height + kEmptyFeedCollectionViewCellBufferToAllowForScrolling)
-            
+        //Section 0 corresponds to showing picture upload queue image feed collection view cells. These cells show when there are pictures in the picture upload queue of the camera data manager
+        if(indexPath.section == 0){
+            return CGSize(width: collectionView.frame.width, height: kPictureUploadCollectionViewCellHeight)
         }
+            
+        //section 1 corresponds to either the empty feed collection view cell or the standard image feed collection view cell depending on how many images are in the picture data array
         else{
-        
-            let picture = pictureDataArray[indexPath.row]
-        
-            if let width = picture.width, let height = picture.height {
             
-                let ratio = height / width
-            
-                var height = collectionView.frame.width * ratio
-            
-                if(height > kCollectionViewCellHeightLimit){
-                    height = kCollectionViewCellHeightLimit
-                }
-            
-                return CGSize(width: collectionView.frame.width, height: height + kCollectionViewCellInfoViewHeight)
-            
+            //return size for empty feed collection view cell
+            if(pictureDataArray.count == 0){
+
+                return CGSize(width: collectionView.frame.width, height: collectionView.frame.height + kEmptyFeedCollectionViewCellBufferToAllowForScrolling)
+                
             }
+            //return size for image feed collection view cell
             else{
-                return CGSize(width: collectionView.frame.width, height: collectionView.frame.width + kCollectionViewCellInfoViewHeight)
+        
+                let picture = pictureDataArray[indexPath.row]
+        
+                if let width = picture.width, let height = picture.height {
+            
+                    let ratio = height / width
+            
+                    var height = collectionView.frame.width * ratio
+            
+                    if(height > kCollectionViewCellHeightLimit){
+                        height = kCollectionViewCellHeightLimit
+                    }
+                    
+                    return CGSize(width: collectionView.frame.width, height: height + kCollectionViewCellInfoViewHeight)
+            
+                }
+                else{
+                    return CGSize(width: collectionView.frame.width, height: collectionView.frame.width + kCollectionViewCellInfoViewHeight)
+                }
             }
         }
     }
@@ -193,38 +238,58 @@ class FeedViewModel: NSObject {
      */
     func setUpCollectionViewCell(indexPath : NSIndexPath, collectionView : UICollectionView) -> UICollectionViewCell {
         
-        
-        if(pictureDataArray.count == 0){
+         //Section 0 corresponds to showing picture upload queue image feed collection view cells. These cells show when there are pictures in the picture upload queue of the camera data manager
+        if(indexPath.section == 0){
             
-            let cell : EmptyFeedCollectionViewCell
+            let cell : PictureUploadQueueImageFeedCollectionViewCell
             
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("EmptyFeedCollectionViewCell", forIndexPath: indexPath) as! EmptyFeedCollectionViewCell
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("PictureUploadQueueImageFeedCollectionViewCell", forIndexPath: indexPath) as! PictureUploadQueueImageFeedCollectionViewCell
+            
+            
+            let picture = CameraDataManager.SharedInstance.pictureUploadQueue[indexPath.row]
+            
+            cell.setupData(picture.image, caption: picture.displayName)
             
             return cell
-            
+
         }
+        //section 1 corresponds to either the empty feed collection view cell or the standard image feed collection view cell depending on how many images are in the picture data array
         else{
-        
-            let cell: ImageFeedCollectionViewCell
-        
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageFeedCollectionViewCell", forIndexPath: indexPath) as! ImageFeedCollectionViewCell
-        
-            let picture = pictureDataArray[indexPath.row]
-        
-            cell.setupData(
-                picture.url,
-                image: picture.image,
-                displayName: picture.displayName,
-                ownerName: picture.ownerName,
-                timeStamp: picture.timeStamp,
-                fileName: picture.fileName
-            )
-        
-            cell.layer.shouldRasterize = true
-            cell.layer.rasterizationScale = UIScreen.mainScreen().scale
-        
-            return cell
             
+            //return EmptyFeedCollectionViewCell
+            if(pictureDataArray.count == 0){
+            
+                let cell : EmptyFeedCollectionViewCell
+            
+                cell = collectionView.dequeueReusableCellWithReuseIdentifier("EmptyFeedCollectionViewCell", forIndexPath: indexPath) as! EmptyFeedCollectionViewCell
+            
+                return cell
+            
+            }
+            //return ImageFeedCollectionViewCell
+            else{
+        
+                let cell: ImageFeedCollectionViewCell
+                
+                cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageFeedCollectionViewCell", forIndexPath: indexPath) as! ImageFeedCollectionViewCell
+        
+                let picture = pictureDataArray[indexPath.row]
+        
+                cell.setupData(
+                    picture.url,
+                    image: picture.image,
+                    displayName: picture.displayName,
+                    ownerName: picture.ownerName,
+                    timeStamp: picture.timeStamp,
+                    fileName: picture.fileName
+                )
+        
+                cell.layer.shouldRasterize = true
+                cell.layer.rasterizationScale = UIScreen.mainScreen().scale
+        
+                return cell
+            
+            }
         }
         
     }
@@ -237,9 +302,5 @@ class FeedViewModel: NSObject {
             callback()
         }
     }
-
-    
-    
     
 }
-

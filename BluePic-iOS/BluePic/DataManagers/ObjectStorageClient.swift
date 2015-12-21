@@ -1,7 +1,18 @@
-/*
-Licensed Materials - Property of IBM
-© Copyright IBM Corporation 2015. All Rights Reserved.
-*/
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 
 import Foundation
@@ -45,9 +56,7 @@ class ObjectStorageClient {
         mutableURLRequest.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
         let jsonPayload = "{ \"auth\": { \"identity\": { \"methods\": [ \"password\" ], \"password\": { \"user\": { \"id\": \"\(userId)\", \"password\": \"\(password)\" } } }, \"scope\": { \"project\": { \"id\": \"\(projectId)\" } } } }"
         
-        //print("jsonPayload = \(jsonPayload)")
         mutableURLRequest.HTTPBody = jsonPayload.dataUsingEncoding(NSUTF8StringEncoding)
-        //mutableURLRequest.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonPayload, options: NSJSONWritingOptions())
         
         self.executeCall(mutableURLRequest, successCodes: [201],
             onSuccess: { (responseHeaders) in
@@ -197,7 +206,6 @@ class ObjectStorageClient {
      */
     func uploadImage(containerName: String, imageName: String, image: UIImage,
         onSuccess: (imageURL: String) -> Void, onFailure: (error: String) -> Void) {
-            // http://stackoverflow.com/questions/8564833/ios-upload-image-and-text-using-http-post
             let imageData = UIImagePNGRepresentation(image)
             let imageURL = "\(publicURL)/\(containerName)/\(imageName)"
             let nsURL = NSURL(string: imageURL)!

@@ -1,7 +1,18 @@
-/*
-Licensed Materials - Property of IBM
-© Copyright IBM Corporation 2015. All Rights Reserved.
-*/
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 
 import UIKit
@@ -72,6 +83,8 @@ class FeedViewController: UIViewController {
         
         Utils.registerNibWithCollectionView("ImageFeedCollectionViewCell", collectionView: collectionView)
         
+        Utils.registerNibWithCollectionView("PictureUploadQueueImageFeedCollectionViewCell", collectionView: collectionView)
+        
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: "userTriggeredRefresh", forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl.hidden = true
@@ -97,6 +110,16 @@ class FeedViewController: UIViewController {
             self.logoImageView.image = UIImage(named: "shutter")
             self.logoImageView.startRotating(1)
         }
+        else if(feedViewModelNotification == FeedViewModelNotification.UploadingPhotoStarted){
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.logoImageView.startRotating(1)
+            }
+        }
+        else if(feedViewModelNotification == FeedViewModelNotification.UploadingPhotoFinished){
+            self.logoImageView.stopRotating()
+        }
+        
     }
 
     
@@ -106,8 +129,9 @@ class FeedViewController: UIViewController {
     func reloadDataInCollectionView(){
         
         collectionView.reloadData()
-        logoImageView.stopRotating()
+        tryToStopLoadingAnimation()
         
+        self.collectionView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     
@@ -121,6 +145,19 @@ class FeedViewController: UIViewController {
         
         viewModel.repullForNewData()
         
+    }
+    
+    
+    /**
+     Method will only allow the loading animation of the eye to stop if the picture upload queue is empty. This is because if the picture upload queue has picture in it, then we want to ensure the eye continues to spin until all the photos in the picture upload queue have finished uploading
+     */
+    func tryToStopLoadingAnimation(){
+        
+        if(CameraDataManager.SharedInstance.pictureUploadQueue.count == 0){
+            
+            logoImageView.stopRotating()
+            
+        } 
     }
 
 }

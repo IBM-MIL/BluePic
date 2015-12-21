@@ -1,7 +1,18 @@
-/*
-Licensed Materials - Property of IBM
-© Copyright IBM Corporation 2015. All Rights Reserved.
-*/
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 
 class TabBarViewModel: NSObject {
@@ -11,9 +22,6 @@ class TabBarViewModel: NSObject {
     
     //callback that allows the tab bar view model to send DataManagerNotifications to the tab bar VC
     var passDataNotificationToTabBarVCCallback : ((dataManagerNotification : DataManagerNotification)->())!
-    
-    //state variable that keeps track of if we've already presented the default logic vc, used to help make sure we are showing the loading animation at the right time
-    var didPresentDefaultLoginVC = false
     
     //state variable that keeps track of if we've successfully pulled data yet, used to help make sure we are showing the loading animation at the right time
     var hasSuccessFullyPulled = false
@@ -69,9 +77,9 @@ class TabBarViewModel: NSObject {
      Method tells the feed to start the loading animation
      */
     func tellFeedToStartLoadingAnimation(){
-        if(didPresentDefaultLoginVC == true && hasSuccessFullyPulled == false){
+  
+        if(hasSuccessFullyPulled == false){
             DataManagerCalbackCoordinator.SharedInstance.sendNotification(DataManagerNotification.StartLoadingAnimationForAppLaunch)
-            didPresentDefaultLoginVC = false
         }
         
     }
