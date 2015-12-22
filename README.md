@@ -169,7 +169,7 @@ The feed (first tab) shows all the latest photos posted to the BluePic community
 <p align="center">Figure 9. Main feed view.</p>
 
 ### Post a Photo
-Posting to the BluePic community is easy. Tap the middle tab in the tab bar and choose to either Choose a photo from the Camera Roll or Take a photo using the device's camera. You can then give the photo a caption before posting.
+Posting to the BluePic community is easy. Tap the middle tab in the tab bar and choose to either choose a photo from the camera roll or take a photo using the device's camera. You can then give the photo a caption before posting.
 
 <p align="center">
 <img src="img/post.PNG"  alt="Drawing" height=550 border=0 /></p>
