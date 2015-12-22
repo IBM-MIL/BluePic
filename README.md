@@ -34,32 +34,46 @@ Currently, BluePic supports Xcode 7.1.1, iOS 9+, and Swift 2. Designed for iPhon
 <br>
 ## Getting Started
 
-### 1. Create Bluemix Application and Services
-Click the Deploy to Bluemix button below. It will create a Bluemix application in your account (it will prompt you to create one if you don't have one) and initialize the required services.
+### 1. Create Bluemix Account
+Create an IBM Bluemix account [here](https://console.ng.bluemix.net/registration/?cm_mc_uid=32373843009114392241684&cm_mc_sid_50200000=1450718074) and log in. If you already have an account, log in and continue to step 2.
+
+### 2. BluePic Account Requirements
+A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10 services. If this is your first time using Bluemix move on to step 3. Otherwise, BluePic requires 512 Mb of memory and 4 services, if your account does not have enough resources availabe, delete unused instances to free up resources. You can check your usage by looking at the DASHBOARD tab of Bluemix:
+<p align="center">
+<img src="img/account_usage.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure 1: Bluemix account usage for memory and services.</p>
+   
+### 3. Create Bluemix Application and Services
+Click the "Deploy to Bluemix" button below. It will create the BluePic Bluemix application in your account and initialize the required services.
 <p align="center">
 <a href="https://bluemix.net/deploy?repository=https://github.com/rolandoasmat/MyBluemixApp.git"> <img src="https://bluemix.net/deploy/button.png" alt="Deploy to Bluemix"></a>
 </p>
 
-If desired, update the app name, region, organization or space of the application (default parameters work). Click DEPLOY.
+If desired, update the app name, region, organization or space of the application (default parameters work). Click DEPLOY:
 <p align="center">
-<img src="img/deploy_button_params.PNG"  alt="Drawing" width=300 border=0 /></p>
-<p align="center">Figure 1: Parameters to deploy a Bluemix application.</p>
+<img src="img/deploy_button_params.PNG"  alt="Drawing" width=400 border=0 /></p>
+<p align="center">Figure 2: Parameters to deploy a Bluemix application.</p>
 
 Upon success you should see:
 <p align="center">
-<img src="img/deploy_button_success.PNG"  alt="Drawing" width=300 border=0 /></p>
-<p align="center">Figure 2: Deploy success page.</p>
+<img src="img/deploy_button_success.PNG"  alt="Drawing" width=400 border=0 /></p>
+<p align="center">Figure 3: Deploy success page.</p>
 
-Note: If deploying to Bluemix fails, make sure to manually delete the failed application on the Bluemix Dashboard as well as the created project on DevOps services (formerly known as JazzHub) before trying again.
+**Note:** If deploying to Bluemix fails, it will have created a faulty application on your account as well as a DevOps services (formerly known as JazzHub) project, these must be deleted manually before trying again. Steps on how to do this [here](#deploy-to-bluemix-failed).
 
-
-Next go to your dashboard by clicking the dashboard link on the top of the page. On your dashboard the application should then become accessible:
+Next go to your dashboard by clicking the "Dashboard" tab on the top of the page: 
 <p align="center">
-<img src="img/dashboard_application.PNG"  alt="Drawing" height=300 border=0 /></p>
-<p align="center">Figure 3: Bluemix dashboard.</p>
+<img src="img/deploy_success_dashboard.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure 4: Getting back to Dashboard after successful deployment.</p>
 
-<br>
-### 2. Create an application instance on Facebook
+On your dashboard the application should then become accessible:
+<p align="center">
+<img src="img/dashboard_application.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure 5: Bluemix dashboard.</p>
+
+
+
+### 4. Create an application instance on Facebook
 In order to have the app authenticate with Facebook, you must create an application instance on Facebook's website and connect it to your Bluemix app's Mobile Client Access.
 
 1. To create an application instance on Facebook's website, first go to [Facebook's Quick Start for iOS](https://developers.facebook.com/quickstarts/?platform=ios) page. Type 	`BluePic` as the name of your new Facebook app and click the `Create New Facebook App ID` button.
@@ -67,7 +81,7 @@ In order to have the app authenticate with Facebook, you must create an applicat
 1. On the screen that follows, in the `Configure your info.plist` section under `step 2`, copy that information into your `info.plist` file. You can find the `info.plist` file in Configuration folder of the xcode project. If you have trouble finding the `CFBundleURLType` key, note that xcode changes the `CFBundleURLType` key to `URL types` when the key is entered. Your `info.plist` file should now look like this:
 <p align="center">
 <img src="img/fb_info.PNG"  alt="Drawing" height=150 border=0 /></p>
-<p align="center">Figure 4. Info.plist file.</p>
+<p align="center">Figure 6. Info.plist file.</p>
 
 1. Next scroll to the bottom of the quick start page where it says `Supply us with your Bundle Identifier` and enter the app's bundle identifier. To find the bundle identifer in the Xcode project you can do the following: 
 	* Make sure the project navigator folder icon is selected in the top left of xcode. Select the BluePic project at the top of the file structure and then select the BluePic target. Under the identity section, you should see a text field for the bundle identifier that is empty. You can make the bundle identifier anything you want, `com.BluePic` for example.
@@ -76,9 +90,7 @@ In order to have the app authenticate with Facebook, you must create an applicat
 
 Thats it for all the Facebook login setup. The rest of the Facebook authentication steps are already setup in the BluePic Xcode project!
 
-
-
-
+<br>
 ### 3. Connect BluePic to your Bluemix Account
 The app has to be configured with certain credentials from each of the three Bluemix services. The file `keys.plist` located in the `Configuration` directory of the BluePic Xcode project must be updated with the following credentials:
 
@@ -415,6 +427,60 @@ For BluePic, we used a simple architecture where there is no middle tier compone
 Cloudant Sync requires a complete replica of the database on each mobile client. This may not be feasible for apps with large databases. Under such scenarios, instead of leveraging Cloudant Sync, the REST API provided by Cloudant could be used to perform CRUD and query operations against the remote Cloudant instance.  Though replicating subsets of records can be done today with Cloudant Sync, doing so with large databases where only a small subset of records should be replicated can introduce performance problems.
 
 Using Cloudant Sync without an additional middle tier component between the mobile app and the database requires the mobile code to know the username and password for accessing the Cloudant database. This will lead to security breaches if someone gets their hands on those credentials. Hence, security could be a reason for having all database operations go first through a middleware component (e.g. Liberty, Node.js) to verify that only authenticated and authorized users of the app can perform such operations. In this architecture, the credentials to access the database are only known by the middleware component.
+<br>
+## Troubleshooting
+
+### Deploy to Bluemix failed
+If the Deploy to Bluemix button failed, you would see a page similar to this:
+<p align="center">
+<img src="img/deploy_failed.PNG"  alt="Drawing" width=400 border=0 /></p>
+<p align="center">Figure . A failed deployment to Bluemix.</p>
+
+These are some of the most common reasons for a failed deployment:
+
+* Your account does not have enough resources. BluePic requires requires 512 Mb of memory and 4 services to deploy successfully. 
+* You have already deployed BluePic to your account and have tried to deploy it again.
+* Bluemix servers are down.
+
+Even though the deployment failed, Bluemix still have created an application, initializes some services and creates a DevOps project. You must delete these **manually** before attempting to deploy again. Begin by first going back to the dashboard, click the "Dashboard" tab on top of the page:
+<p align="center">
+<img src="img/deploy_failed_dashboard.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Click on the "Dashboard" tab to go back to the main page.</p>
+
+Once in the dashboard, find the failed application under the "Applications" section and click on the gray gear located on the top right corner of the application block to open the menu:
+<p align="center">
+<img src="img/application_gear.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Opening the menu of a Bluemix application.</p>
+
+With the menu now open, click the "Delete App" option:
+<p align="center">
+<img src="img/delete_app.PNG"  alt="Drawing" width=300 border=0 /></p>
+<p align="center">Figure . Menu open, delete option highlighted of a Bluemix application.</p>
+
+You will get at "Are you sure..." message, make sure all the services under the Services tab are checked and click DELETE, this will delete the application and all of the created services:
+<p align="center">
+<img src="img/delete_app_confirmation.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Deleting a Bluemix application and its binded services.</p>
+
+Now, you must delete the Bluemix DevOps project that was created. First, go to the IBM Bluemix DevOps Services main site [here](https://hub.jazz.net/). The main page looks like this:
+<p align="center">
+<img src="img/jazzhub.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . IBM Bluemix DecOps Services main page.</p>
+
+Locate the created project on the main page and click the gray gear icon on the top right corner of the project block. 
+<p align="center">
+<img src="img/devops_project.PNG"  alt="Drawing" width=400 border=0 /></p>
+<p align="center">Figure . Opening the menu of a DevOps Services Project.</p>
+
+With the project page open, click on the Delete tab on the left side of the page: 
+<p align="center">
+<img src="img/devops_project_delete.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Deleting a DevOps Services project.</p>
+
+On the next page, type out DELETE in the empty field and click CONFIRM:
+<p align="center">
+<img src="img/devops_delete_confirm.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Confirm the deletion of tselected project.</p>
 
 <br>
 ## License
