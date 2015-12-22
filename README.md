@@ -1,5 +1,3 @@
-
-
 <p align="center">
 <img src="img/banner.jpg"  alt="Drawing" border=0 />
 </p>
@@ -66,14 +64,100 @@ Next go to your dashboard by clicking the "Dashboard" tab on the top of the page
 <img src="img/deploy_success_dashboard.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 4: Getting back to Dashboard after successful deployment.</p>
 
-On your dashboard the application should then become accessible:
+On your dashboard the application should then become accessible, click on the Application box to open that Application Overview:
 <p align="center">
 <img src="img/dashboard_application.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 5: Bluemix dashboard.</p>
 
+Application Overview:
+<p align="center">
+<img src="img/application_overview.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure 5: Application Overview.</p>
 
+### 4. Connect BluePic to your Bluemix Account
+The app has to be configured with certain credentials from each of the three Bluemix services. The file `keys.plist` located in the `Configuration` directory of the BluePic Xcode project must be updated accordingly.
 
-### 4. Create an application instance on Facebook
+<p align="center">
+<img src="img/keys.PNG"  alt="Drawing" width=500 border=0 /></p>
+<p align="center">Figure 5. keys.plist located in the BluePic-iOS/BluePic/Configuration directory.</p>
+
+#### Cloudant NoSQL DB 
+
+* cdt_username: This username will be used to identiry your created databases. From the Application Overview (see Figure 5 above) open the Cloudant NoSQL Instantiating Credentials by clcking on the "Show Credentials" tab of the service box:
+
+<p align="center">
+<img src="img/cloudant_credentials.PNG"  alt="Drawing" width=350 border=0 /></p>
+<p align="center">Figure . Credentials of a Cloudant NoSQL DB service.</p>
+
+Copy the “username” credential and paste it in the "cdt_username" field of keys.plist file.
+
+* cdt_db\_name: This will be the name of the main Cloudant database the iOS application will use to store information. We first must go to the Cloudant Dashboard, click on the CloudantNoSQL DB icon from the Application Overview (see Figure 5 above). You will land in this page:
+
+<p align="center">
+<img src="img/cloudant_landing.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Cloudant service landing page.</p>
+
+Click "VIEW YOUR DATA ON THE CLOUDANT DASHBOARD" to open the Cloudant Dashboard:
+<p align="center">
+<img src="img/cloudant_dashboard.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Cloudant Dashboard.</p>
+
+Click on "Create Database", enter a name, and click "Create":
+<p align="center">
+<img src="img/cloudant_create_db.PNG"  alt="Drawing" width=400 border=0 /></p>
+<p align="center">Figure . Creating a new Database.</p>
+
+**Note:** The name must start with a letter and can only contain lowercase letters (a-z), digits (0-9) and the following characters _, $, (, ), +, -, and /.
+
+Put the name of the newly created database into the "cdt_db\_name" field of key.plist file.  
+
+* cdt\_key and cdt\_pass: You must generate an API Key and Password for the mobile application to access the remote database. On the database page, click on the Permissions tab:
+
+<p align="center">
+<img src="img/cloudant_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Permissions button on database main page.</p>
+
+On the Permissions page click "Generate API key" button:
+<p align="center">
+<img src="img/cloudant_generate_api_key.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Generate an API key for the database.</p>
+
+It will create a Key and Password:
+<p align="center">
+<img src="img/cloudant_api_key.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Generated Key and Password.</p>
+
+Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file respectively. Also, ensure that the created API Key has Writer and Replicator permissions by checking these boxes:
+<p align="center">
+<img src="img/cloudant_key_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Ensure the generated API Key has the correct permissions.</p>
+
+* cdt\_tests\_db\_name: The application has test cases that run on a separate database, we're storing the name of this test database here. Go through the exact same steps as done for "cdt\_db\_name" except with a different database name. Put this name into "cdt\_tests\_db\_name" field of keys.plist file. Once created, click on the "Permissions" tab of the new database. The previously generated API Key should be listed, again ensure it has Writer and Replicator permissions:
+
+<p align="center">
+<img src="img/cloudant_test_db_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Permissions page of the database to run test cases.</p>
+
+#### Mobile Client Access
+
+* backend_route: List on the top of the Application Overview page, next to the "Routes:" label, see Figure 6. 
+* GUID: "clientId" from corresponding credentials section, see Figure 6.
+
+#### Object Storage (marked 3 above)co
+
+Download and install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli/releases) and run the following command
+
+`cf service-key 'Object Storage-rz' object-storage-bluepic-key`
+
+It will return several keys.
+
+* obj_stg\_public\_url: "auth\_url" from CF CLI command. 
+* obj_stg\_password: "password" from CF CLI command.
+* obj_stg\_user\_id: "userId" from CF CLI command.
+* obj_stg\_project\_id: "projectId" from corresponding credentials section, see Figure 6.
+* obj_stg\_auth\_url: "auth\_url" from corresponding credentials section, see Figure 6.
+
+### 5. Create an application instance on Facebook
 In order to have the app authenticate with Facebook, you must create an application instance on Facebook's website and connect it to your Bluemix app's Mobile Client Access.
 
 1. To create an application instance on Facebook's website, first go to [Facebook's Quick Start for iOS](https://developers.facebook.com/quickstarts/?platform=ios) page. Type 	`BluePic` as the name of your new Facebook app and click the `Create New Facebook App ID` button.
@@ -90,56 +174,7 @@ In order to have the app authenticate with Facebook, you must create an applicat
 
 Thats it for all the Facebook login setup. The rest of the Facebook authentication steps are already setup in the BluePic Xcode project!
 
-<br>
-### 3. Connect BluePic to your Bluemix Account
-The app has to be configured with certain credentials from each of the three Bluemix services. The file `keys.plist` located in the `Configuration` directory of the BluePic Xcode project must be updated with the following credentials:
-
-<p align="center">
-<img src="img/keys.PNG"  alt="Drawing" width=500 border=0 /></p>
-<p align="center">Figure 5. keys.plist located in the BluePic-iOS/BluePic/Configuration directory.</p>
-
-To Begin, click on your BluePic application in the Application section of your Bluemix Dashboard. You should then see the following screen:
-
-<p align="center">
-<img src="img/bluemix_credentials.PNG"  alt="Drawing" width=500 border=0 /></p>
-<p align="center">Figure 6. Application overview page, marked with credentials location.</p>
-
-#### Cloudant NoSQL DB (marked 1 above)
-
-* cdt_username: Open the credentials drop down by clicking "Show Credentials". This is the Red square of Figure 6.You should see the following: 
-
-<p align="center">
-<img src="img/keys.PNG"  alt="Drawing" width=500 border=0 /></p>
-<p align="center">Figure 5. keys.plist located in the BluePic-iOS/BluePic/Configuration directory.</p>
-
-Copy the “username” credential and store it in the cdt_username field.
-
-* cdt_db\_name: Create a dabatase from the Cloudant Dashboard and put the name of created database here.  
-* cdt_key: Generate an API KEY from the Cloudant Dashboard by clicking "Generate API Key" in the permissions tab of any database. Make sure to add Writer and Replicator permissions as well. Note the displayed password.
-* cdt_pass: Enter the password of the API Key here.
-* cdt_tests\_db\_name: Create a dabatase for the test cases to run in, put that name here. Once created go to "Permissions" tab, under "Share Database" put the API KEY from above, again ensure it has Writer and Replicator permissions.
-
-#### Mobile Client Access (marked 2 above)
-
-* backend_route: List on the top of the Application Overview page, next to the "Routes:" label, see Figure 6. 
-* GUID: "clientId" from corresponding credentials section, see Figure 6.
-
-#### Object Storage (marked 3 above)
-
-Download and install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli/releases) and run the following command
-
-`cf service-key 'Object Storage-rz' object-storage-bluepic-key`
-
-It will return several keys.
-
-* obj_stg\_public\_url: "auth\_url" from CF CLI command. 
-* obj_stg\_password: "password" from CF CLI command.
-* obj_stg\_user\_id: "userId" from CF CLI command.
-* obj_stg\_project\_id: "projectId" from corresponding credentials section, see Figure 6.
-* obj_stg\_auth\_url: "auth\_url" from corresponding credentials section, see Figure 6.
-
-<br>
-### 4. Pre-populate Feed with Stock Photos (Optional)
+### 6. Pre-populate Feed with Stock Photos (Optional)
 Once BluePic is configured, you should be able to upload photos and see them appear on the feed and profile. However, initially your feed will be empty. If you would like to pre-populate your feed with 3 images, simply do the following:
 
 1. With the BluePic Xcode project open, show the Test Navigator by clicking the 4th icon from the right of the Navigator (toolbar frame on the left side)
@@ -169,7 +204,7 @@ The feed (first tab) shows all the latest photos posted to the BluePic community
 <p align="center">Figure 9. Main feed view.</p>
 
 ### Post a Photo
-Posting to the BluePic community is easy. Tap the middle tab in the tab bar and choose to either choose a photo from the camera roll or take a photo using the device's camera. You can then give the photo a caption before posting.
+Posting to the BluePic community is easy. Tap the middle tab in the tab bar and choose to either Choose a photo from the Camera Roll or Take a photo using the device's camera. You can then give the photo a caption before posting.
 
 <p align="center">
 <img src="img/post.PNG"  alt="Drawing" height=550 border=0 /></p>
