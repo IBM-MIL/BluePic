@@ -54,6 +54,20 @@ class FeedViewController: UIViewController {
         setupViewModel()
  
     }
+    
+    
+    /**
+     Method called upon view will appear. It trys to start the loading animation if there are any photos in the camera data manager's picture upload queue
+     
+     - parameter animated: Bool
+     */
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tryToStartLoadingAnimation()
+        
+    }
+    
 
     /**
      Method called as a callback from the OS when the app receives a memeory warning from the OS
@@ -144,6 +158,18 @@ class FeedViewController: UIViewController {
         self.refreshControl.endRefreshing()
         
         viewModel.repullForNewData()
+        
+    }
+   
+    
+    /**
+     Method will try to start the loading animation if there are any photos in the picture upload queue. This allows for the loading animation to start up again if the user switches between the image feed and profile vc
+     */
+    func tryToStartLoadingAnimation(){
+        
+        if(CameraDataManager.SharedInstance.pictureUploadQueue.count > 0){
+            logoImageView.startRotating(1)
+        }
         
     }
     
