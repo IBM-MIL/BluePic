@@ -184,7 +184,7 @@ It will return several values:
 * obj_stg\_password: Copy the "password" from CF CLI command into this field.
 * obj_stg\_user\_id: Copy the "userId" from CF CLI command into this field.
 * obj_stg\_project\_id: Copy the "projectId" from from CF CLI command into this field.
-* obj_stg\_public\_url: Copy the "projectId" from CF CLI command and append it to "https://dal.objectstorage.open.softlayer.com/v1/AUTH_${PROJECT_ID}". Paste the resulting string into this field.
+* obj_stg\_public\_url: Copy the "projectId" from CF CLI command and append it to "https://dal.objectstorage.open.softlayer.com/v1/AUTH_". Paste the resulting string into this field.
 * obj_stg\_auth\_url: Paste "***REMOVED***" into this field.
 
 ### 5. Create an application instance on Facebook
