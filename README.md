@@ -27,7 +27,7 @@ BluePic is a sample application for iOS that shows you how to connect your mobil
 * [Architecture/Bluemix Services Implementation](#architecturebluemix-services-implementation)
 	* [Mobile Client Access Facebook Authentication](#1-mobile-client-access-facebook-authentication)
 	* [Cloudant Sync (CDTDatastore)](#2-cloudant-sync-cdtdatastore)
-	* [Object Storage](3-object-storage) 
+	* [Object Storage](#3-object-storage) 
 * [Architecture Forethought](#architecture-forethought)
 * [Troubleshooting](#troubleshooting)
 	* [Deploy to Bluemix Failure](#deploy-to-bluemix-failure) 
