@@ -97,7 +97,7 @@ The app has to be configured with certain credentials from each of the three Blu
 
 #### Cloudant NoSQL DB 
 
-* cdt_username: This username will be used to identiry your created databases. From the Application Overview (see Figure 5 above) open the Cloudant NoSQL Instantiating Credentials by clcking on the "Show Credentials" tab of the service box:
+* cdt_username: This username will be used to identify your created databases. From the Application Overview (see Figure 5 above) open the Cloudant NoSQL Instantiating Credentials by clcking on the "Show Credentials" tab of the service box:
 
 <p align="center">
 <img src="img/cloudant_credentials.PNG"  alt="Drawing" width=350 border=0 /></p>
