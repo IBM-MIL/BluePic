@@ -5,7 +5,7 @@
 <br>
 #BluePic
 
-BluePic is a sample application for iOS that shows you how to connect your mobile application with IBM Bluemix services. It is a photo sharing app that allows you to take photos, upload them and share them with the BluePic community. The BluPic community will be made up of all the users that run an instance of **your** created app.
+BluePic is a sample application for iOS that shows you how to connect your mobile application with IBM Bluemix services. It is a photo sharing app that allows you to take photos, upload them and share them with the BluePic community. The BluePic community will be made up of all the users that run an instance of **your** created app.
 
 <br>
 ## Table of Contents
@@ -51,17 +51,17 @@ Currently, BluePic supports Xcode 7.1.1, iOS 9+, and Swift 2. Designed for iPhon
 Create an IBM Bluemix account [here](https://console.ng.bluemix.net/registration/?cm_mc_uid=32373843009114392241684&cm_mc_sid_50200000=1450718074) and log in. If you already have an account, log in and continue to step 2.
 
 ### 2. BluePic Account Requirements
-A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10 services. If this is your first time using Bluemix move on to step 3. Otherwise, BluePic requires 512 Mb of memory and 4 services, if your account does not have enough resources availabe, delete unused instances to free up resources. You can check your usage by looking at the Dashboard tab of Bluemix:
+A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10 services. If this is your first time using Bluemix, continue to step 3. Otherwise, you might need to delete some reources. BluePic requires 512 Mb of memory and 4 services. If your account does not have enough resources availabe, delete unused instances to free up resources. You can check your usage by looking at the Dashboard tab of Bluemix:
 <p align="center">
 <img src="img/account_usage.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure 1: Bluemix account usage for memory and services.</p>
+<p align="center">Figure 1: Bluemix dashboard, account usage for memory and services highlighted.</p>
 
 ### 3. Create Bluemix Application and Services
 Click the "Deploy to Bluemix" button below. It will create the BluePic Bluemix application in your account and initialize the required services.
 
 <p align="center"><a href="https://bluemix.net/deploy?repository=https://github.com/rolandoasmat/MyBluemixApp.git"><img src="https://bluemix.net/deploy/button.png" alt="Deploy to Bluemix"></a></p>
 
-If desired, update the app name, region, organization or space of the application (default parameters work). Click DEPLOY:
+If desired, update the app name, region, organization or space of the application (default parameters work). Click Deploy:
 <p align="center">
 <img src="img/deploy_button_params.PNG"  alt="Drawing" width=400 border=0 /></p>
 <p align="center">Figure 2: Parameters to deploy a Bluemix application.</p>
@@ -73,7 +73,7 @@ Upon success you should see:
 
 **Note:** If deploying to Bluemix fails, it will have created a faulty application on your account as well as a DevOps services (formerly known as JazzHub) project, these must be deleted manually before trying again. Steps on how to do this [here](#deploy-to-bluemix-failed).
 
-Next go to your dashboard by clicking the "Dashboard" tab on the top of the page: 
+Next, go to your dashboard by clicking the "Dashboard" tab on the top of the page: 
 <p align="center">
 <img src="img/deploy_success_dashboard.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 4: Getting back to Dashboard after successful deployment.</p>
@@ -86,14 +86,14 @@ On your dashboard the application should then become accessible, click on the Ap
 Application Overview:
 <p align="center">
 <img src="img/application_overview.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure 5: Application Overview.</p>
+<p align="center">Figure 6: Application Overview.</p>
 
 ### 4. Connect BluePic to your Bluemix Account
 The app has to be configured with certain credentials from each of the three Bluemix services. The file `keys.plist` located in the `Configuration` directory of the BluePic Xcode project must be updated accordingly.
 
 <p align="center">
 <img src="img/keys.PNG"  alt="Drawing" width=500 border=0 /></p>
-<p align="center">Figure 5. keys.plist located in the BluePic-iOS/BluePic/Configuration directory.</p>
+<p align="center">Figure 7. keys.plist located in the BluePic-iOS/BluePic/Configuration directory.</p>
 
 #### Cloudant NoSQL DB 
 
@@ -101,7 +101,7 @@ The app has to be configured with certain credentials from each of the three Blu
 
 <p align="center">
 <img src="img/cloudant_credentials.PNG"  alt="Drawing" width=350 border=0 /></p>
-<p align="center">Figure . Credentials of a Cloudant NoSQL DB service.</p>
+<p align="center">Figure 8. Credentials of a Cloudant NoSQL DB service.</p>
 
 Copy the “username” credential and paste it in the "cdt_username" field of keys.plist file.
 
@@ -109,17 +109,17 @@ Copy the “username” credential and paste it in the "cdt_username" field of k
 
 <p align="center">
 <img src="img/cloudant_landing.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Cloudant service landing page.</p>
+<p align="center">Figure 9. Cloudant service landing page.</p>
 
 Click "VIEW YOUR DATA ON THE CLOUDANT DASHBOARD" to open the Cloudant Dashboard:
 <p align="center">
 <img src="img/cloudant_dashboard.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Cloudant Dashboard.</p>
+<p align="center">Figure 10. Cloudant Dashboard.</p>
 
 Click on "Create Database", enter a name, and click "Create":
 <p align="center">
 <img src="img/cloudant_create_db.PNG"  alt="Drawing" width=400 border=0 /></p>
-<p align="center">Figure . Creating a new Database.</p>
+<p align="center">Figure 11. Creating a new Database.</p>
 
 **Note:** The name must start with a letter and can only contain lowercase letters (a-z), digits (0-9) and the following characters _, $, (, ), +, -, and /.
 
@@ -129,28 +129,28 @@ Put the name of the newly created database into the "cdt_db\_name" field of key.
 
 <p align="center">
 <img src="img/cloudant_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Permissions button on database main page.</p>
+<p align="center">Figure 12. Permissions button on database main page.</p>
 
 On the Permissions page click "Generate API key" button:
 <p align="center">
 <img src="img/cloudant_generate_api_key.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Generate an API key for the database.</p>
+<p align="center">Figure 13. Generate an API key for the database.</p>
 
 It will create a Key and Password:
 <p align="center">
 <img src="img/cloudant_api_key.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Generated Key and Password.</p>
+<p align="center">Figure 14. Generated Key and Password.</p>
 
 Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file respectively. Also, ensure that the created API Key has Writer and Replicator permissions by checking these boxes:
 <p align="center">
 <img src="img/cloudant_key_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Ensure the generated API Key has the correct permissions.</p>
+<p align="center">Figure 15. Ensure the generated API Key has the correct permissions.</p>
 
 * cdt\_tests\_db\_name: The application has test cases that run on a separate database, we're storing the name of this test database here. Go through the exact same steps as done for "cdt\_db\_name" except with a different database name. Put this name into "cdt\_tests\_db\_name" field of keys.plist file. Once created, click on the "Permissions" tab of the new database. The previously generated API Key should be listed, again ensure it has Writer and Replicator permissions:
 
 <p align="center">
 <img src="img/cloudant_test_db_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Permissions page of the database to run test cases.</p>
+<p align="center">Figure 16. Permissions page of the database to run test cases.</p>
 
 #### Mobile Client Access
 
@@ -158,7 +158,7 @@ Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file res
 
 <p align="center">
 <img src="img/application_routes.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Routes label on Application Overview page.</p>
+<p align="center">Figure 17. Routes label on Application Overview page.</p>
 
 Copy and paste this value into the "backend_route" field of keys.plist file.
  
@@ -168,14 +168,14 @@ Copy the "clientId" credential and paste into "GUID" field of keys.plist file.
 
 <p align="center">
 <img src="img/mobile_client_access_id.PNG"  alt="Drawing" width=300 border=0 /></p>
-<p align="center">Figure . Credentials of a Mobile Client Access service.</p>
+<p align="center">Figure 18. Credentials of a Mobile Client Access service.</p>
 
 #### Object Storage 
 
 Download and install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli/releases), make sure to install the Mac OS X 64 bit Installer, the latest release:
 <p align="center">
 <img src="img/cf_cli.PNG"  alt="Drawing" width=300 border=0 /></p>
-<p align="center">Figure . Cloud Foundry CLI installer.</p>
+<p align="center">Figure 19. Cloud Foundry CLI installer.</p>
 
 Run the following commands on the terminal:
 
@@ -194,7 +194,7 @@ In the following command, use the same name as the one created above:
 It will return several values:
 <p align="center">
 <img src="img/cf_cli_service_key.PNG"  alt="Drawing" width=600 border=0 /></p>
-<p align="center">Figure . Cloud Froundry CLI command.</p>
+<p align="center">Figure 20. Cloud Froundry CLI command.</p>
 
 * obj_stg\_password: Copy the "password" from CF CLI command into this field.
 * obj_stg\_user\_id: Copy the "userId" from CF CLI command into this field.
@@ -214,7 +214,7 @@ In order to have the app authenticate with Facebook, you must create an applicat
 1. On the screen that follows, in the `Configure your info.plist` section under `step 2`, copy that information into your `info.plist` file. You can find the `info.plist` file in Configuration folder of the xcode project. If you have trouble finding the `CFBundleURLType` key, note that xcode changes the `CFBundleURLType` key to `URL types` when the key is entered. Your `info.plist` file should now look like this:
 <p align="center">
 <img src="img/fb_info.PNG"  alt="Drawing" height=150 border=0 /></p>
-<p align="center">Figure 6. Info.plist file.</p>
+<p align="center">Figure 21. Info.plist file.</p>
 
 1. Next scroll to the bottom of the quick start page where it says `Supply us with your Bundle Identifier` and enter the app's bundle identifier. To find the bundle identifer in the Xcode project you can do the following: 
 	* Make sure the project navigator folder icon is selected in the top left of xcode. Select the BluePic project at the top of the file structure and then select the BluePic target. Under the identity section, you should see a text field for the bundle identifier that is empty. You can make the bundle identifier anything you want, `com.BluePic` for example.
@@ -229,7 +229,7 @@ Once BluePic is configured, you should be able to upload photos and see them app
 1. With the BluePic Xcode project open, show the Test Navigator by clicking the 4th icon from the right of the Navigator (toolbar frame on the left side)
 <p align="center">
 <img src="img/populate_feed.PNG"  alt="Drawing" height=400 border=0 /></p>
-<p align="center">Figure 7. PopulateFeedWithPhotos test case.</p>
+<p align="center">Figure 22. PopulateFeedWithPhotos test case.</p>
 
 1. Run the test called PopulateFeedWithPhotos which should be grayed out (disabled by default when tests are run) by right clicking it and clicking **Test "PopulateFeedWithPhotos"**.
 
@@ -243,28 +243,28 @@ BluePic was designed so that anyone can quickly launch the app and view photos p
 
 <p align="center">
 <img src="img/login.PNG"  alt="Drawing" height=550 border=0 /></p>
-<p align="center">Figure 8. Welcome page.</p>
+<p align="center">Figure 23. Welcome page.</p>
 
 ### View Feed
 The feed (first tab) shows all the latest photos posted to the BluePic community (regardless if logged in or not).
 
 <p align="center">
 <img src="img/feed.PNG"  alt="Drawing" height=550 border=0 /></p>
-<p align="center">Figure 9. Main feed view.</p>
+<p align="center">Figure 24. Main feed view.</p>
 
 ### Post a Photo
 Posting to the BluePic community is easy. Tap the middle tab in the tab bar and choose to either Choose a photo from the Camera Roll or Take a photo using the device's camera. You can then give the photo a caption before posting.
 
 <p align="center">
 <img src="img/post.PNG"  alt="Drawing" height=550 border=0 /></p>
-<p align="center">Figure 10. Posting a photo.</p>
+<p align="center">Figure 25. Posting a photo.</p>
 
 ### View Profile
 By tapping the third tab, you can view your profile. This shows your Facebook profile photo, lists how many photos you've posted, and shows all the photos you've posted to BluePic.
 
 <p align="center">
 <img src="img/profile.PNG"  alt="Drawing" height=550 border=0 /></p>
-<p align="center">Figure 11. Profile feed.</p>
+<p align="center">Figure 26. Profile feed.</p>
 
 <br>
 ## Project Structure
@@ -279,7 +279,7 @@ The following architecture is utilized for BluePic. For authentication, Mobile C
 
 <p align="center">
 <img src="img/architecture.PNG"  alt="Drawing" height=350 border=0 /></p>
-<p align="center">Figure 12. BluePic Architecture Diagram.</p>
+<p align="center">Figure 27. BluePic Architecture Diagram.</p>
 
 ### 1. Mobile Client Access Facebook Authentication
 [Bluemix Mobile Client Access Facebook Authentication](https://www.ng.bluemix.net/docs/services/mobileaccess/gettingstarted/ios/index.html) is used for logging into BluePic. 
@@ -435,7 +435,7 @@ You can view the Cloudant database (including profile and picture documents) by 
 
 <p align="center">
 <img src="img/cloudant_sync.PNG"  alt="Drawing" height=550 border=0 /></p>
-<p align="center">Figure 13. Cloudant NoSQL service.</p>
+<p align="center">Figure 28. Cloudant NoSQL service.</p>
 
 <br>
 ### 3. Object Storage
@@ -501,7 +501,7 @@ You can view the Object Storage database (including all photos uploaded) by navi
 
 <p align="center">
 <img src="img/object_storage.PNG"  alt="Drawing" height=550 border=0 /></p>
-<p align="center">Figure 14. Object Storage service.</p>
+<p align="center">Figure 29. Object Storage service.</p>
 
 <br>
 ## Architecture Forethought
@@ -518,7 +518,7 @@ Using Cloudant Sync without an additional middle tier component between the mobi
 If the Deploy to Bluemix button failed, you would see a page similar to this:
 <p align="center">
 <img src="img/deploy_failed.PNG"  alt="Drawing" width=400 border=0 /></p>
-<p align="center">Figure . A failed deployment to Bluemix.</p>
+<p align="center">Figure 30. A failed deployment to Bluemix.</p>
 
 These are some of the most common reasons for a failed deployment:
 
@@ -529,42 +529,42 @@ These are some of the most common reasons for a failed deployment:
 Even though the deployment failed, Bluemix still have created an application, initializes some services and creates a DevOps project. You must delete these **manually** before attempting to deploy again. Begin by first going back to the dashboard, click the "Dashboard" tab on top of the page:
 <p align="center">
 <img src="img/deploy_failed_dashboard.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Click on the "Dashboard" tab to go back to the main page.</p>
+<p align="center">Figure 31. Click on the "Dashboard" tab to go back to the main page.</p>
 
 Once in the dashboard, find the failed application under the "Applications" section and click on the gray gear located on the top right corner of the application block to open the menu:
 <p align="center">
 <img src="img/application_gear.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Opening the menu of a Bluemix application.</p>
+<p align="center">Figure 32. Opening the menu of a Bluemix application.</p>
 
 With the menu now open, click the "Delete App" option:
 <p align="center">
 <img src="img/delete_app.PNG"  alt="Drawing" width=300 border=0 /></p>
-<p align="center">Figure . Menu open, delete option highlighted of a Bluemix application.</p>
+<p align="center">Figure 33. Menu open, delete option highlighted of a Bluemix application.</p>
 
 You will get at "Are you sure..." message, make sure all the services under the Services tab are checked and click DELETE, this will delete the application and all of the created services:
 <p align="center">
 <img src="img/delete_app_confirmation.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Deleting a Bluemix application and its binded services.</p>
+<p align="center">Figure 34. Deleting a Bluemix application and its binded services.</p>
 
 Now, you must delete the Bluemix DevOps project that was created. First, go to the IBM Bluemix DevOps Services main site [here](https://hub.jazz.net/). The main page looks like this:
 <p align="center">
 <img src="img/jazzhub.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . IBM Bluemix DecOps Services main page.</p>
+<p align="center">Figure 35. IBM Bluemix DecOps Services main page.</p>
 
 Locate the created project on the main page and click the gray gear icon on the top right corner of the project block. 
 <p align="center">
 <img src="img/devops_project.PNG"  alt="Drawing" width=400 border=0 /></p>
-<p align="center">Figure . Opening the menu of a DevOps Services Project.</p>
+<p align="center">Figure 36. Opening the menu of a DevOps Services Project.</p>
 
 With the project page open, click on the Delete tab on the left side of the page: 
 <p align="center">
 <img src="img/devops_project_delete.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Deleting a DevOps Services project.</p>
+<p align="center">Figure 37. Deleting a DevOps Services project.</p>
 
 On the next page, type out DELETE in the empty field and click CONFIRM:
 <p align="center">
 <img src="img/devops_delete_confirm.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure . Confirm the deletion of tselected project.</p>
+<p align="center">Figure 38. Confirm the deletion of tselected project.</p>
 
 <br>
 ## License
