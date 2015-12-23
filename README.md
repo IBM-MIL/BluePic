@@ -140,8 +140,21 @@ Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file res
 
 #### Mobile Client Access
 
-* backend_route: List on the top of the Application Overview page, next to the "Routes:" label, see Figure 6. 
-* GUID: "clientId" from corresponding credentials section, see Figure 6.
+* backend_route: Listed on the top of the Application Overview page, next to the "Routes:" label:
+
+<p align="center">
+<img src="img/application_routes.PNG"  alt="Drawing" width=700 border=0 /></p>
+<p align="center">Figure . Routes label on Application Overview page.</p>
+
+Copy and paste this value into the "backend_route" field of keys.plist file.
+ 
+* GUID: From the Application Overview (see Figure 5 above) open the Mobile Client Access Instantiating Credentials by clcking on the "Show Credentials" tab of the service box:
+
+Copy the "clientId" credential and paste into "GUID" field of keys.plist file.
+
+<p align="center">
+<img src="img/mobile_client_access_id.PNG"  alt="Drawing" width=300 border=0 /></p>
+<p align="center">Figure . Credentials of a Mobile Client Access service.</p>
 
 #### Object Storage (marked 3 above)co
 
