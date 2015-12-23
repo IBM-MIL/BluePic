@@ -156,19 +156,30 @@ Copy the "clientId" credential and paste into "GUID" field of keys.plist file.
 <img src="img/mobile_client_access_id.PNG"  alt="Drawing" width=300 border=0 /></p>
 <p align="center">Figure . Credentials of a Mobile Client Access service.</p>
 
-#### Object Storage (marked 3 above)co
+#### Object Storage 
 
-Download and install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli/releases) and run the following command
+Download and install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli/releases), make sure to install the Mac OS X 64 bit Installer, the latest release:
+<p align="center">
+<img src="img/cf_cli.PNG"  alt="Drawing" width=300 border=0 /></p>
+<p align="center">Figure . Clouda Foundry CLI installer.</p>
 
-`cf service-key 'Object Storage-rz' object-storage-bluepic-key`
+Run the following commands on the terminal:
 
-It will return several keys.
+`cf api https://api.ng.bluemix.net`
+`cf login -u <email_address> -o <email_address> -s dev`
+`cf create-service-key 'Object Storage-rz' <unique_name_for_this_key>`
+`cf service-key 'Object Storage-rz' <unique_name_for_this_key>`
 
-* obj_stg\_public\_url: "auth\_url" from CF CLI command. 
-* obj_stg\_password: "password" from CF CLI command.
-* obj_stg\_user\_id: "userId" from CF CLI command.
-* obj_stg\_project\_id: "projectId" from corresponding credentials section, see Figure 6.
-* obj_stg\_auth\_url: "auth\_url" from corresponding credentials section, see Figure 6.
+It will return several values:
+<p align="center">
+<img src="img/cf_cli_service_key.PNG"  alt="Drawing" width=600 border=0 /></p>
+<p align="center">Figure . Cloud Froundry CLI command.</p>
+
+* obj_stg\_password: Copy the "password" from CF CLI command.
+* obj_stg\_user\_id: Copy the "userId" from CF CLI command.
+* obj_stg\_project\_id: Copy the "projectId" from from CF CLI command.
+* obj_stg\_public\_url: Copy the "projectId" from CF CLI command and append it to: "https://dal.objectstorage.open.softlayer.com/v1/AUTH\_${PROJECT\_ID}".
+* obj_stg\_auth\_url: Paste this: "***REMOVED***".
 
 ### 5. Create an application instance on Facebook
 In order to have the app authenticate with Facebook, you must create an application instance on Facebook's website and connect it to your Bluemix app's Mobile Client Access.
