@@ -12,12 +12,25 @@ BluePic is a sample application for iOS that shows you how to connect your mobil
 * [About IBM Bluemix](#about-ibm-bluemix)
 * [Requirements](#requirements)
 * [Getting Started](#getting-started)
-	* [Create Bluemix Account](#1-create-bluemix-account) 
+	* [Create Bluemix Account](#1-create-bluemix-account)
+	* [BluePic Account Requirements](#2-bluepic-account-requirements) 
+	* [Create Bluemix Application and Services](#3-create-bluemix-application-and-services)
+	* [Connect BluePic to your Bluemix Account](#4-connect-bluepic-to-your-bluemix-account) 
+	* [Create an application instance on Facebook](#5-create-an-application-instance-on-facebook)
+	* [Pre-populate Feed with Stock Photos (Optional)](#6-pre-populate-feed-with-stock-photos-optional)
 * [Using BluePic](#using-bluepic)
+	* [Facebook Login](#facebook-login)
+	* [View Feed](#view-feed) 
+	* [Post a Photo](#post-a-photo)
+	* [View Profile](#view-profile) 
 * [Project Structure](#project-structure)
 * [Architecture/Bluemix Services Implementation](#architecturebluemix-services-implementation)
+	* [Mobile Client Access Facebook Authentication](#1-mobile-client-access-facebook-authentication)
+	* [Cloudant Sync (CDTDatastore)](#2-cloudant-sync-cdtdatastore)
+	* [Object Storage](3-object-storage) 
 * [Architecture Forethought](#architecture-forethought)
 * [Troubleshooting](#troubleshooting)
+	* [Deploy to Bluemix Failure](#deploy-to-bluemix-failure) 
 * [License](#license)
 
 <br>
@@ -501,7 +514,7 @@ Using Cloudant Sync without an additional middle tier component between the mobi
 <br>
 ## Troubleshooting
 
-### Deploy to Bluemix failed
+### Deploy to Bluemix Failure
 If the Deploy to Bluemix button failed, you would see a page similar to this:
 <p align="center">
 <img src="img/deploy_failed.PNG"  alt="Drawing" width=400 border=0 /></p>
