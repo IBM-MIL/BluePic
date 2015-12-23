@@ -564,7 +564,7 @@ With the project page open, click on the Delete tab on the left side of the page
 On the next page, type out DELETE in the empty field and click CONFIRM:
 <p align="center">
 <img src="img/devops_delete_confirm.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure 38. Confirm the deletion of tselected project.</p>
+<p align="center">Figure 38. Confirm the deletion of selected project.</p>
 
 <br>
 ## License
