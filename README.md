@@ -174,6 +174,8 @@ Pick a name for the service key and use it in the following commands:
 
 `cf create-service-key 'Object Storage-rz' <unique_name_for_this_key>`
 
+In the following command, use the same name as the one created above:
+
 `cf service-key 'Object Storage-rz' <unique_name_for_this_key>`
 
 It will return several values:
