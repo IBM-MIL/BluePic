@@ -5,17 +5,19 @@
 <br>
 #BluePic
 
-BluePic is a sample application for iOS that shows you how to connect your mobile application with IBM Bluemix services. It is a photo sharing app that allows you to take photos, upload them and share them with the BluePic community.
+BluePic is a sample application for iOS that shows you how to connect your mobile application with IBM Bluemix services. It is a photo sharing app that allows you to take photos, upload them and share them with the BluePic community. The BluPic community will be made up of all the users that run an instance of **your** created app.
 
 <br>
 ## Table of Contents
 * [About IBM Bluemix](#about-ibm-bluemix)
 * [Requirements](#requirements)
 * [Getting Started](#getting-started)
+	* [Create Bluemix Account](1.-create-bluemix-account) 
 * [Using BluePic](#using-bluepic)
 * [Project Structure](#project-structure)
 * [Architecture/Bluemix Services Implementation](#architecturebluemix-services-implementation)
 * [Architecture Forethought](#architecture-forethought)
+* [Troubleshooting](#troubleshooting)
 * [License](#license)
 
 <br>
