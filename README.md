@@ -226,7 +226,7 @@ Thats it for all the Facebook login setup. The rest of the Facebook authenticati
 ### 6. Pre-populate Feed with Stock Photos (Optional)
 Once BluePic is configured, you should be able to upload photos and see them appear on the feed and profile. However, initially your feed will be empty. If you would like to pre-populate your feed with 3 images, simply do the following:
 
-1. With the BluePic Xcode project open, show the Test Navigator by clicking the 4th icon from the right of the Navigator (toolbar frame on the left side)
+1. Open **BluePic.xcworkspace** to get started. With the BluePic Xcode project open, show the Test Navigator by clicking the 4th icon from the right of the Navigator (toolbar frame on the left side)
 <p align="center">
 <img src="img/populate_feed.PNG"  alt="Drawing" height=400 border=0 /></p>
 <p align="center">Figure 22. PopulateFeedWithPhotos test case.</p>
