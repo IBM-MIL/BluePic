@@ -41,6 +41,7 @@ A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10
 <img src="img/account_usage.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 1: Bluemix account usage for memory and services.</p>
    
+   
 ### 3. Create Bluemix Application and Services
 Click the "Deploy to Bluemix" button below. It will create the BluePic Bluemix application in your account and initialize the required services.
 <p align="center">
@@ -166,8 +167,11 @@ Download and install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli
 Run the following commands on the terminal:
 
 `cf api https://api.ng.bluemix.net`
+
 `cf login -u <email_address> -o <email_address> -s dev`
+
 `cf create-service-key 'Object Storage-rz' <unique_name_for_this_key>`
+
 `cf service-key 'Object Storage-rz' <unique_name_for_this_key>`
 
 It will return several values:
