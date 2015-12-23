@@ -170,6 +170,8 @@ Run the following commands on the terminal:
 
 `cf login -u <email_address> -o <email_address> -s dev`
 
+Pick a name for the service key and use it in the following commands:
+
 `cf create-service-key 'Object Storage-rz' <unique_name_for_this_key>`
 
 `cf service-key 'Object Storage-rz' <unique_name_for_this_key>`
