@@ -179,11 +179,11 @@ It will return several values:
 <img src="img/cf_cli_service_key.PNG"  alt="Drawing" width=600 border=0 /></p>
 <p align="center">Figure . Cloud Froundry CLI command.</p>
 
-* obj_stg\_password: Copy the "password" from CF CLI command.
-* obj_stg\_user\_id: Copy the "userId" from CF CLI command.
-* obj_stg\_project\_id: Copy the "projectId" from from CF CLI command.
-* obj_stg\_public\_url: Copy the "projectId" from CF CLI command and append it to: "https://dal.objectstorage.open.softlayer.com/v1/AUTH\_${PROJECT\_ID}".
-* obj_stg\_auth\_url: Paste this: "***REMOVED***".
+* obj_stg\_password: Copy the "password" from CF CLI command into this field.
+* obj_stg\_user\_id: Copy the "userId" from CF CLI command into this field.
+* obj_stg\_project\_id: Copy the "projectId" from from CF CLI command into this field.
+* obj_stg\_public\_url: Copy the "projectId" from CF CLI command and append it to "https://dal.objectstorage.open.softlayer.com/v1/AUTH\_\<projectId>". Paste the resulting string into this field.
+* obj_stg\_auth\_url: Paste "***REMOVED***" into this field.
 
 ### 5. Create an application instance on Facebook
 In order to have the app authenticate with Facebook, you must create an application instance on Facebook's website and connect it to your Bluemix app's Mobile Client Access.
