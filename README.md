@@ -204,7 +204,6 @@ It will return several values:
 `https://dal.objectstorage.open.softlayer.com/v1/AUTH_<project_id>`
 
 Paste the resulting string into this field.
-* obj_stg\_auth\_url: Paste "***REMOVED***" into this field.
 
 ### 5. Create an application instance on Facebook
 In order to have the app authenticate with Facebook, you must create an application instance on Facebook's website and connect it to your Bluemix app's Mobile Client Access.
