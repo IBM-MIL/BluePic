@@ -783,7 +783,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/BluePic/Configuration/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.be.BluePic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bundle.id.BluePic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BluePic/SupportingFiles/BluePic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -806,7 +806,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/BluePic/Configuration/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.cio.be.BluePic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bundle.id.BluePic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BluePic/SupportingFiles/BluePic-Bridging-Header.h";
 			};
@@ -818,7 +818,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = BluePicTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mil.ibm.BluePicTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bundle.id.BluePicTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BluePic.app/BluePic";
 			};
@@ -830,7 +830,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = BluePicTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mil.ibm.BluePicTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bundle.id.ibm.BluePicTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BluePic.app/BluePic";
 			};
@@ -841,7 +841,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = BluePicUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mil.ibm.BluePicUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bundle.id.BluePicUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = BluePic;
 				USES_XCTRUNNER = YES;
@@ -853,7 +853,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = BluePicUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mil.ibm.BluePicUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bundle.id.BluePicUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = BluePic;
 				USES_XCTRUNNER = YES;
