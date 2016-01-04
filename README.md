@@ -71,12 +71,12 @@ Upon success you should see:
 <img src="img/deploy_button_success.PNG"  alt="Drawing" width=400 border=0 /></p>
 <p align="center">Figure 3: Bluemix application successfully deployed.</p>
 
-**Note:** If deploying to Bluemix fails, it will have created a faulty application on your account as well as a DevOps services (formerly known as JazzHub) project, these must be deleted manually before trying again. Steps on how to do this [here](#deploy-to-bluemix-failed).
+**Note:** If deploying to Bluemix fails, it will have created a faulty application on your account as well as a DevOps services (formerly known as JazzHub) project, these must be deleted manually before trying again. Steps on how to do this [here](#deploy-to-bluemix-failure).
 
 Next, go to your dashboard by clicking the "Dashboard" tab on the top of the page: 
 <p align="center">
 <img src="img/deploy_success_dashboard.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure 4: Getting back to Dashboard after successful deployment.</p>
+<p align="center">Figure 4: Getting back to dashboard after successful deployment.</p>
 
 On your dashboard the application should then become accessible, click on the Application box to open that Application Overview:
 <p align="center">
