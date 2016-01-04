@@ -162,7 +162,7 @@ Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file res
 
 Copy and paste this value into the "backend_route" field of keys.plist file.
  
-* GUID: From the Application Overview (see Figure 5 above) open the Mobile Client Access Instantiating Credentials by clcking on the "Show Credentials" tab of the service box:
+* GUID: From the Application Overview (see Figure 5 above) open the Mobile Client Access Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
 
 Copy the clientId credential and paste into GUID field of keys.plist file.
 
