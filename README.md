@@ -97,7 +97,7 @@ The app has to be configured with certain credentials from each of the three Blu
 
 #### Cloudant NoSQL DB 
 
-* cdt_username: This username will be used to identify your created databases. From the Application Overview (see Figure 5 above) open the Cloudant NoSQL Instantiating Credentials by clcking on the "Show Credentials" tab of the service box:
+* cdt_username: This username will be used to identify your created databases. From the Application Overview (see Figure 5 above) open the Cloudant NoSQL Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
 
 <p align="center">
 <img src="img/cloudant_credentials.PNG"  alt="Drawing" width=350 border=0 /></p>
@@ -164,7 +164,7 @@ Copy and paste this value into the "backend_route" field of keys.plist file.
  
 * GUID: From the Application Overview (see Figure 5 above) open the Mobile Client Access Instantiating Credentials by clcking on the "Show Credentials" tab of the service box:
 
-Copy the "clientId" credential and paste into "GUID" field of keys.plist file.
+Copy the clientId credential and paste into GUID field of keys.plist file.
 
 <p align="center">
 <img src="img/mobile_client_access_id.PNG"  alt="Drawing" width=300 border=0 /></p>
@@ -196,10 +196,10 @@ It will return several values:
 <img src="img/cf_cli_service_key.PNG"  alt="Drawing" width=600 border=0 /></p>
 <p align="center">Figure 20. Cloud Froundry CLI command.</p>
 
-* obj_stg\_password: Copy the "password" from CF CLI command into this field.
-* obj_stg\_user\_id: Copy the "userId" from CF CLI command into this field.
-* obj_stg\_project\_id: Copy the "projectId" from from CF CLI command into this field.
-* obj_stg\_public\_url: Copy the "projectId" from CF CLI command and append it to "https://dal.objectstorage.open.softlayer.com/v1/AUTH_" like so:
+* obj_stg\_password: Copy the password from CF CLI command into this field.
+* obj_stg\_user\_id: Copy the userId from CF CLI command into this field.
+* obj_stg\_project\_id: Copy the projectId from from CF CLI command into this field.
+* obj_stg\_public\_url: Copy the projectId from CF CLI command and append it to "https://dal.objectstorage.open.softlayer.com/v1/AUTH_" like so:
 
 `https://dal.objectstorage.open.softlayer.com/v1/AUTH_<project_id>`
 
