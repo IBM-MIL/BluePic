@@ -89,7 +89,7 @@ Application Overview:
 <p align="center">Figure 6: Application Overview.</p>
 
 ### 4. Connect BluePic to your Bluemix Account
-The app has to be configured with certain credentials from each of the three Bluemix services. The file `keys.plist` located in the `Configuration` directory of the BluePic Xcode project must be updated accordingly.
+The app has to be configured with certain credentials from each of the three Bluemix services. Clone the BluePic repo and open the **BluePic.xcworkspace** to get started. The file `keys.plist` located in the `Configuration` directory of the BluePic Xcode project must be updated accordingly.
 
 <p align="center">
 <img src="img/keys.PNG"  alt="Drawing" width=500 border=0 /></p>
