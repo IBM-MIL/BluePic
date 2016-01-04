@@ -146,7 +146,7 @@ Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file res
 <img src="img/cloudant_key_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 15. Ensure the generated API Key has the correct permissions.</p>
 
-* cdt\_tests\_db\_name: The application has test cases that run on a separate database, we're storing the name of this test database here. Go through the exact same steps as done for "cdt\_db\_name" except with a different database name. Put this name into "cdt\_tests\_db\_name" field of keys.plist file. Once created, click on the "Permissions" tab of the new database. The previously generated API Key should be listed, again ensure it has Writer and Replicator permissions:
+* cdt\_tests\_db\_name: The application has test cases that run on a separate database, we're storing the name of this test database here. Go through the exact same steps as done for "cdt\_db\_name" except with a different database name. Put this name into "cdt\_tests\_db\_name" field of keys.plist file. Once created, click on the "Permissions" tab of the new database.  DO NOT generate another api key for the tests database. The previously generated API Key should be listed, again ensure it has Writer and Replicator permissions:
 
 <p align="center">
 <img src="img/cloudant_test_db_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
