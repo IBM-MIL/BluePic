@@ -69,7 +69,7 @@ If desired, update the app name, region, organization or space of the applicatio
 Upon success you should see:
 <p align="center">
 <img src="img/deploy_button_success.PNG"  alt="Drawing" width=400 border=0 /></p>
-<p align="center">Figure 3: Deploy success page.</p>
+<p align="center">Figure 3: Bluemix application successfully deployed.</p>
 
 **Note:** If deploying to Bluemix fails, it will have created a faulty application on your account as well as a DevOps services (formerly known as JazzHub) project, these must be deleted manually before trying again. Steps on how to do this [here](#deploy-to-bluemix-failed).
 
