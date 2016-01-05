@@ -3,27 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>cdt_username</key>
-	<string>***REMOVED***</string>
+	<string></string>
 	<key>cdt_db_name</key>
-	<string>my_db</string>
+	<string></string>
 	<key>cdt_tests_db_name</key>
-	<string>tests_db</string>
+	<string></string>
 	<key>cdt_key</key>
-	<string>***REMOVED***</string>
+	<string></string>
 	<key>cdt_pass</key>
-	<string>***REMOVED***</string>
+	<string></string>
 	<key>backend_route</key>
-	<string>***REMOVED***</string>
+	<string></string>
 	<key>GUID</key>
-	<string>***REMOVED***</string>
+	<string></string>
 	<key>obj_stg_public_url</key>
-	<string>***REMOVED***</string>
+	<string></string>
 	<key>obj_stg_password</key>
-	<string>***REMOVED***</string>
+	<string></string>
 	<key>obj_stg_user_id</key>
-	<string>***REMOVED***</string>
+	<string></string>
 	<key>obj_stg_project_id</key>
-	<string>***REMOVED***</string>
+	<string></string>
 	<key>obj_stg_auth_url</key>
 	<string>***REMOVED***</string>
 </dict>
