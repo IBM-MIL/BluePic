@@ -3,7 +3,8 @@
 </p>
 
 <br>
-#BluePic
+## BluePic
+[![Build Status](https://travis-ci.org/IBM-MIL/BluePic.svg?branch=master)](https://travis-ci.org/IBM-MIL/BluePic)
 
 BluePic is a sample application for iOS that shows you how to connect your mobile application with IBM Bluemix services. It is a photo sharing app that allows you to take photos, upload them and share them with the BluePic community. The BluePic community will be made up of all the users that run an instance of **your** created app.
 
