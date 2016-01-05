@@ -43,16 +43,6 @@
                </Test>
             </SkippedTests>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "347472A81BFA8C6A0018B7F6"
-               BuildableName = "BluePicUITests.xctest"
-               BlueprintName = "BluePicUITests"
-               ReferencedContainer = "container:BluePic.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
