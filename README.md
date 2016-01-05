@@ -11,6 +11,7 @@ BluePic is a sample application for iOS that shows you how to connect your mobil
 ## Table of Contents
 * [About IBM Bluemix](#about-ibm-bluemix)
 * [Requirements](#requirements)
+* [Project Structure](#project-structure)
 * [Getting Started](#getting-started)
 	* [Create Bluemix Account](#1-create-bluemix-account)
 	* [BluePic Account Requirements](#2-bluepic-account-requirements) 
@@ -23,7 +24,6 @@ BluePic is a sample application for iOS that shows you how to connect your mobil
 	* [View Feed](#view-feed) 
 	* [Post a Photo](#post-a-photo)
 	* [View Profile](#view-profile) 
-* [Project Structure](#project-structure)
 * [Architecture/Bluemix Services Implementation](#architecturebluemix-services-implementation)
 	* [Mobile Client Access Facebook Authentication](#1-mobile-client-access-facebook-authentication)
 	* [Cloudant Sync (CDTDatastore)](#2-cloudant-sync-cdtdatastore)
