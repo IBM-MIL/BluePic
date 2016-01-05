@@ -51,7 +51,7 @@ Currently, BluePic supports Xcode 7.1.1, iOS 9+, and Swift 2. Designed for iPhon
 Create an IBM Bluemix account [here](https://console.ng.bluemix.net/registration/?cm_mc_uid=32373843009114392241684&cm_mc_sid_50200000=1450718074) and log in. If you already have an account, log in and continue to step 2.
 
 ### 2. BluePic Account Requirements
-A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10 services. If this is your first time using Bluemix, continue to step 3. Otherwise, you might need to delete some reources. BluePic requires 512 Mb of memory and 4 services. If your account does not have enough resources availabe, delete unused instances to free up resources. You can check your usage by looking at the Dashboard tab of Bluemix:
+A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10 services. If this is your first time using Bluemix, continue to step 3. Otherwise, you might need to delete some resources. BluePic requires 512 Mb of memory and 4 services. If your account does not have enough resources available, delete unused instances to free up resources. You can check your usage by looking at the Dashboard tab of Bluemix:
 <p align="center">
 <img src="img/account_usage.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 1: Bluemix dashboard, account usage for memory and services highlighted.</p>
@@ -162,7 +162,7 @@ Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file res
 
 Copy and paste this value into the "backend_route" field of keys.plist file.
  
-* GUID: From the Application Overview (see Figure 5 above) open the Mobile Client Access Instantiating Credentials by clcking on the "Show Credentials" tab of the service box:
+* GUID: From the Application Overview (see Figure 5 above) open the Mobile Client Access Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
 
 Copy the "clientId" credential and paste into "GUID" field of keys.plist file.
 
@@ -194,7 +194,7 @@ In the following command, use the same name as the one created above:
 It will return several values:
 <p align="center">
 <img src="img/cf_cli_service_key.PNG"  alt="Drawing" width=600 border=0 /></p>
-<p align="center">Figure 20. Cloud Froundry CLI command.</p>
+<p align="center">Figure 20. Cloud Foundry CLI command.</p>
 
 * obj_stg\_password: Copy the "password" from CF CLI command into this field.
 * obj_stg\_user\_id: Copy the "userId" from CF CLI command into this field.
@@ -210,17 +210,17 @@ In order to have the app authenticate with Facebook, you must create an applicat
 
 1. To create an application instance on Facebook's website, first go to [Facebook's Quick Start for iOS](https://developers.facebook.com/quickstarts/?platform=ios) page. Type 	`BluePic` as the name of your new Facebook app and click the `Create New Facebook App ID` button.
 
-1. On the screen that follows, in the `Configure your info.plist` section under `step 2`, copy that information into your `info.plist` file. You can find the `info.plist` file in Configuration folder of the xcode project. If you have trouble finding the `CFBundleURLType` key, note that xcode changes the `CFBundleURLType` key to `URL types` when the key is entered. Your `info.plist` file should now look like this:
+1. On the screen that follows, in the `Configure your info.plist` section under `step 2`, copy that information into your `info.plist` file. You can find the `info.plist` file in Configuration folder of the Xcode project. If you have trouble finding the `CFBundleURLType` key, note that Xcode changes the `CFBundleURLType` key to `URL types` when the key is entered. Your `info.plist` file should now look like this:
 <p align="center">
 <img src="img/fb_info.PNG"  alt="Drawing" height=150 border=0 /></p>
 <p align="center">Figure 21. Info.plist file.</p>
 
-1. Next scroll to the bottom of the quick start page where it says `Supply us with your Bundle Identifier` and enter the app's bundle identifier. To find the bundle identifer in the Xcode project you can do the following: 
-	* Make sure the project navigator folder icon is selected in the top left of xcode. Select the BluePic project at the top of the file structure and then select the BluePic target. Under the identity section, you should see a text field for the bundle identifier that is empty. You can make the bundle identifier anything you want, `com.BluePic` for example.
-1. Once you you entered the bundle ID on the Facebook quick start page, click `next`. Thats it for the Facebook quick start setup!
+1. Next scroll to the bottom of the quick start page where it says `Supply us with your Bundle Identifier` and enter the app's bundle identifier. To find the bundle identifier in the Xcode project you can do the following: 
+	* Make sure the project navigator folder icon is selected in the top left of Xcode. Select the BluePic project at the top of the file structure and then select the BluePic target. Under the identity section, you should see a text field for the bundle identifier that is empty. You can make the bundle identifier anything you want, `com.BluePic` for example.
+1. Once you entered the bundle ID on the Facebook quick start page, click `next`. Thats it for the Facebook quick start setup!
 1. Next go back to your Bluemix dashboard, under services click `BluePic-AdvancedMobileAccess`. On the page that shows click the `Set Up Authentication` button and then click `Facebook`. Enter your Facebook app ID you gathered from step 2 and press next. 
 
-Thats it for all the Facebook login setup. The rest of the Facebook authentication steps are already setup in the BluePic Xcode project!
+Thats it for the Facebook login setup. The rest of the Facebook authentication steps are already setup in the BluePic Xcode project!
 
 ### 6. Pre-populate Feed with Stock Photos (Optional)
 Once BluePic is configured, you should be able to upload photos and see them appear on the feed and profile. However, initially your feed will be empty. If you would like to pre-populate your feed with 3 images, simply do the following:
@@ -543,7 +543,7 @@ With the menu now open, click the "Delete App" option:
 You will get at "Are you sure..." message, make sure all the services under the Services tab are checked and click DELETE, this will delete the application and all of the created services:
 <p align="center">
 <img src="img/delete_app_confirmation.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure 34. Deleting a Bluemix application and its binded services.</p>
+<p align="center">Figure 34. Deleting a Bluemix application and its bound services.</p>
 
 Now, you must delete the Bluemix DevOps project that was created. First, go to the IBM Bluemix DevOps Services main site [here](https://hub.jazz.net/). The main page looks like this:
 <p align="center">
