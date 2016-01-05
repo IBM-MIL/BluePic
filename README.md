@@ -45,6 +45,13 @@ In Bluemix you should be aware that often the term “Application” is used to 
 Currently, BluePic supports Xcode 7.1.1, iOS 9+, and Swift 2. Designed for iPhone, compatible with iPad.
 
 <br>
+## Project Structure
+* `/BluePic-iOS` directory for the iOS client.
+* `/BluePic-iOS/BluePic/Configuration` directory for configuring Bluemix services keys.
+* `/NodeStarterCode` directory for the server artifact that is deployed to Bluemix.
+* `/img` directory for images for this README.
+
+<br>
 ## Getting Started
 
 ### 1. Create Bluemix Account
@@ -160,7 +167,7 @@ Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file res
 <img src="img/application_routes.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 17. Routes label on Application Overview page.</p>
 
-Copy and paste this value into the "backend_route" field of keys.plist file.
+Copy and paste this value into the backend_route field of keys.plist file. **NOTE:** Make sure to have "http://" at the front of the pasted value. For example: `http://BluePic.bluemix.net`.
  
 * GUID: From the Application Overview (see Figure 5 above) open the Mobile Client Access Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
 
@@ -220,7 +227,7 @@ In order to have the app authenticate with Facebook, you must create an applicat
 1. Once you you entered the bundle ID on the Facebook quick start page, click `next`. Thats it for the Facebook quick start setup!
 1. Next go back to your Bluemix dashboard, under services click `BluePic-AdvancedMobileAccess`. On the page that shows click the `Set Up Authentication` button and then click `Facebook`. Enter your Facebook app ID you gathered from step 2 and press next. 
 
-Thats it for all the Facebook login setup. The rest of the Facebook authentication steps are already setup in the BluePic Xcode project!
+At this point, you should be able to build and run your instance of the BluePic application on Xcode!
 
 ### 6. Pre-populate Feed with Stock Photos (Optional)
 Once BluePic is configured, you should be able to upload photos and see them appear on the feed and profile. However, initially your feed will be empty. If you would like to pre-populate your feed with 3 images, simply do the following:
@@ -264,13 +271,6 @@ By tapping the third tab, you can view your profile. This shows your Facebook pr
 <p align="center">
 <img src="img/profile.PNG"  alt="Drawing" height=550 border=0 /></p>
 <p align="center">Figure 26. Profile feed.</p>
-
-<br>
-## Project Structure
-* `/BluePic-iOS` directory for the iOS client.
-* `/BluePic-iOS/BluePic/Configuration` directory for configuring Bluemix services keys.
-* `/NodeStarterCode` directory for the server artifact that is deployed to Bluemix.
-* `/img` directory for images for this README.
 
 <br>
 ## Architecture/Bluemix Services Implementation
