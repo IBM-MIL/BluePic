@@ -118,7 +118,7 @@ Copy the “username” credential and paste it in the `cdt_username` field of t
 <img src="img/cloudant_landing.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 9. Cloudant service landing page.</p>
 
-Click "VIEW YOUR DATA ON THE CLOUDANT DASHBOARD" to open the Cloudant Dashboard:
+Click "LAUNCH" to open the Cloudant Dashboard:
 <p align="center">
 <img src="img/cloudant_dashboard.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 10. Cloudant Dashboard.</p>
