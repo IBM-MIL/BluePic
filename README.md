@@ -104,15 +104,15 @@ The app has to be configured with certain credentials from each of the three Blu
 
 #### Cloudant NoSQL DB 
 
-* cdt_username: This username will be used to identify your created databases. From the Application Overview (see Figure 5 above) open the Cloudant NoSQL Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
+* `cdt_username`: This username will be used to identify your created databases. From the Application Overview (see Figure 5 above) open the Cloudant NoSQL Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
 
 <p align="center">
 <img src="img/cloudant_credentials.PNG"  alt="Drawing" width=350 border=0 /></p>
 <p align="center">Figure 8. Credentials of a Cloudant NoSQL DB service.</p>
 
-Copy the “username” credential and paste it in the "cdt_username" field of keys.plist file.
+Copy the “username” credential and paste it in the `cdt_username` field of the keys.plist file.
 
-* cdt_db\_name: This will be the name of the main Cloudant database the iOS application will use to store information. We first must go to the Cloudant Dashboard, click on the CloudantNoSQL DB icon from the Application Overview (see Figure 5 above). You will land in this page:
+* `cdt_db_name`: This will be the name of the main Cloudant database the iOS application will use to store information. We first must go to the Cloudant Dashboard, click on the CloudantNoSQL DB icon from the Application Overview (see Figure 5 above). You will land in this page:
 
 <p align="center">
 <img src="img/cloudant_landing.PNG"  alt="Drawing" width=700 border=0 /></p>
@@ -130,9 +130,9 @@ Click on "Create Database", enter a name, and click "Create":
 
 **Note:** The name must start with a letter and can only contain lowercase letters (a-z), digits (0-9) and the following characters _, $, (, ), +, -, and /.
 
-Put the name of the newly created database into the "cdt_db\_name" field of key.plist file.  
+Put the name of the newly created database into the `cdt_db_name` field of the keys.plist file.  
 
-* cdt\_key and cdt\_pass: You must generate an API Key and Password for the mobile application to access the remote database. On the database page, click on the Permissions tab:
+* `cdt_key` and `cdt_pass`: You must generate an API Key and Password for the mobile application to access the remote database. On the database page, click on the Permissions tab:
 
 <p align="center">
 <img src="img/cloudant_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
@@ -148,12 +148,12 @@ It will create a Key and Password:
 <img src="img/cloudant_api_key.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 14. Generated Key and Password.</p>
 
-Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file respectively. Also, ensure that the created API Key has Writer and Replicator permissions by checking these boxes:
+Store these values into the `cdt_key` and `cdt_pass` fields of the keys.plist file respectively. Also, ensure that the created API Key has Writer and Replicator permissions by checking these boxes:
 <p align="center">
 <img src="img/cloudant_key_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 15. Ensure the generated API Key has the correct permissions.</p>
 
-* cdt\_tests\_db\_name: The application has test cases that run on a separate database, we're storing the name of this test database here. Go through the exact same steps as done for "cdt\_db\_name" except with a different database name. Put this name into "cdt\_tests\_db\_name" field of keys.plist file. Once created, click on the "Permissions" tab of the new database.  DO NOT generate another api key for the tests database. The previously generated API Key should be listed, again ensure it has Writer and Replicator permissions:
+* cdt\_tests\_db\_name: The application has test cases that run on a separate database, we're storing the name of this test database here. Go through the exact same steps as done for `cdt_db_name` except with a different database name. Put this name into `cdt_tests_db_name` field of keys.plist file. Once created, click on the "Permissions" tab of the new database.  DO NOT generate another API key for the tests database. The previously generated API Key should be listed, again ensure it has Writer and Replicator permissions:
 
 <p align="center">
 <img src="img/cloudant_test_db_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
@@ -167,11 +167,11 @@ Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file res
 <img src="img/application_routes.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 17. Routes label on Application Overview page.</p>
 
-Copy and paste this value into the backend_route field of keys.plist file. **NOTE:** Make sure to have "http://" at the front of the pasted value. For example: `http://BluePic.bluemix.net`.
+Copy and paste this value into the `backend_route` field of keys.plist file. **NOTE:** Make sure to have "http://" at the front of the pasted value. For example: `http://BluePic.bluemix.net`.
  
 * GUID: From the Application Overview (see Figure 5 above) open the Mobile Client Access Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
 
-Copy the clientId credential and paste into GUID field of keys.plist file.
+Copy the clientId credential and paste into the `GUID` field of keys.plist file.
 
 <p align="center">
 <img src="img/mobile_client_access_id.PNG"  alt="Drawing" width=300 border=0 /></p>
@@ -203,10 +203,10 @@ It will return several values:
 <img src="img/cf_cli_service_key.PNG"  alt="Drawing" width=600 border=0 /></p>
 <p align="center">Figure 20. Cloud Froundry CLI command.</p>
 
-* obj_stg\_password: Copy the password from CF CLI command into this field.
-* obj_stg\_user\_id: Copy the userId from CF CLI command into this field.
-* obj_stg\_project\_id: Copy the projectId from from CF CLI command into this field.
-* obj_stg\_public\_url: Copy the projectId from CF CLI command and append it to "https://dal.objectstorage.open.softlayer.com/v1/AUTH_" like so:
+* `obj_stg_password`: Copy the password from CF CLI command into this field.
+* `obj_stg_user_id`: Copy the userId from CF CLI command into this field.
+* `obj_stg_project_id`: Copy the projectId from from CF CLI command into this field.
+* `obj_stg_public_url`: Copy the projectId from CF CLI command and append it to "https://dal.objectstorage.open.softlayer.com/v1/AUTH_" like so:
 
 `https://dal.objectstorage.open.softlayer.com/v1/AUTH_<project_id>`
 
