@@ -5,6 +5,11 @@ xcode_scheme: BluePic
 xcode_sdk: iphonesimulator9.1
 
 
+# whitelist
+branches:
+  only:
+    - master
+
 #xcode_scheme: BluePic
 before_install:
 - rm -rf keys.plist
