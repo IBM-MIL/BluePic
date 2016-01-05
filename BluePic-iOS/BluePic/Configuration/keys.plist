@@ -25,6 +25,6 @@
 	<key>obj_stg_project_id</key>
 	<string></string>
 	<key>obj_stg_auth_url</key>
-	<string>***REMOVED***</string>
+	<string>https://identity.open.softlayer.com/v3/auth/tokens</string>
 </dict>
 </plist>
