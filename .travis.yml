@@ -7,6 +7,8 @@ xcode_sdk: iphonesimulator9.1
 
 #xcode_scheme: BluePic
 before_install:
-- openssl aes-256-cbc -K $encrypted_de41d3ed93c4_key -iv $encrypted_de41d3ed93c4_iv -in BluePic-iOS/BluePic/Keys.tar.enc -out BluePic-iOS/BluePic/Keys.tar -d
-- tar xvf Keys.tar
+- rm -rf keys.plist
+- openssl aes-256-cbc -K $encrypted_793844ac926e_key -iv $encrypted_793844ac926e_iv -in BluePic-iOS/BluePic/Configuration/keys.plist.enc -out BluePic-iOS/BluePic/Configuration/keys.plist -d
+
+
 
