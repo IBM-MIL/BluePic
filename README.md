@@ -58,7 +58,7 @@ Currently, BluePic supports Xcode 7.1.1, iOS 9+, and Swift 2. Designed for iPhon
 Create an IBM Bluemix account [here](https://console.ng.bluemix.net/registration/?cm_mc_uid=32373843009114392241684&cm_mc_sid_50200000=1450718074) and log in. If you already have an account, log in and continue to step 2.
 
 ### 2. BluePic Account Requirements
-A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10 services. If this is your first time using Bluemix, continue to step 3. Otherwise, you might need to delete some reources. BluePic requires 512 Mb of memory and 4 services. If your account does not have enough resources availabe, delete unused instances to free up resources. You can check your usage by looking at the Dashboard tab of Bluemix:
+A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10 services. If this is your first time using Bluemix, continue to step 3. Otherwise, you might need to delete some reources. BluePic requires 512 MB of memory and 4 services. If your account does not have enough resources availabe, delete unused instances to free up resources. You can check your usage by looking at the Dashboard tab of Bluemix:
 <p align="center">
 <img src="img/account_usage.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 1: Bluemix dashboard, account usage for memory and services highlighted.</p>
@@ -96,7 +96,7 @@ Application Overview:
 <p align="center">Figure 6: Application Overview.</p>
 
 ### 4. Connect BluePic to your Bluemix Account
-The app has to be configured with certain credentials from each of the three Bluemix services. Clone the BluePic repo and open the **BluePic.xcworkspace** to get started. The file `keys.plist` located in the `Configuration` directory of the BluePic Xcode project must be updated accordingly.
+The app has to be configured with certain credentials from each of the three Bluemix services. Clone the BluePic repo and open **BluePic.xcworkspace** (NOT BluePic**.xcodeproj**) to get started. The file `keys.plist` located in the `Configuration` directory of the BluePic Xcode project must be updated accordingly.
 
 <p align="center">
 <img src="img/keys.PNG"  alt="Drawing" width=500 border=0 /></p>
@@ -104,7 +104,7 @@ The app has to be configured with certain credentials from each of the three Blu
 
 #### Cloudant NoSQL DB 
 
-* `cdt_username`: This username will be used to identify your created databases. From the Application Overview (see Figure 5 above) open the Cloudant NoSQL Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
+* `cdt_username`: This username will be used to identify your created databases. Click your newly created application in the Application Overview (see Figure 5 above). On the next page, open the Cloudant NoSQL Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
 
 <p align="center">
 <img src="img/cloudant_credentials.PNG"  alt="Drawing" width=350 border=0 /></p>
