@@ -51,7 +51,7 @@ Currently, BluePic supports Xcode 7.1.1, iOS 9+, and Swift 2. Designed for iPhon
 Create an IBM Bluemix account [here](https://console.ng.bluemix.net/registration/?cm_mc_uid=32373843009114392241684&cm_mc_sid_50200000=1450718074) and log in. If you already have an account, log in and continue to step 2.
 
 ### 2. BluePic Account Requirements
-A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10 services. If this is your first time using Bluemix, continue to step 3. Otherwise, you might need to delete some resources. BluePic requires 512 Mb of memory and 4 services. If your account does not have enough resources available, delete unused instances to free up resources. You can check your usage by looking at the Dashboard tab of Bluemix:
+A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10 services. If this is your first time using Bluemix, continue to step 3. Otherwise, you might need to delete some resources. BluePic requires 512 MB of memory and 4 services. If your account does not have enough resources available, delete unused instances to free up resources. You can check your usage by looking at the Dashboard tab of Bluemix:
 <p align="center">
 <img src="img/account_usage.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 1: Bluemix dashboard, account usage for memory and services highlighted.</p>
