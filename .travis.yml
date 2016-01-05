@@ -4,7 +4,3 @@ xcode_workspace: BluePic-iOS/BluePic.xcworkspace
 xcode_scheme: BluePic
 xcode_sdk: iphonesimulator9.1
 
-#xcode_scheme: BluePic
-before_install:
-- openssl aes-256-cbc -K $encrypted_de41d3ed93c4_key -iv $encrypted_de41d3ed93c4_iv -in BluePic-iOS/BluePic/Configuration.zip.enc -out BluePic-iOS/BluePic/Configuration.zip -d
-- unzip -o BluePic-iOS/BluePic/Configuration.zip
