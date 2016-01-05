@@ -11,6 +11,7 @@ BluePic is a sample application for iOS that shows you how to connect your mobil
 ## Table of Contents
 * [About IBM Bluemix](#about-ibm-bluemix)
 * [Requirements](#requirements)
+* [Project Structure](#project-structure)
 * [Getting Started](#getting-started)
 	* [Create Bluemix Account](#1-create-bluemix-account)
 	* [BluePic Account Requirements](#2-bluepic-account-requirements) 
@@ -23,7 +24,6 @@ BluePic is a sample application for iOS that shows you how to connect your mobil
 	* [View Feed](#view-feed) 
 	* [Post a Photo](#post-a-photo)
 	* [View Profile](#view-profile) 
-* [Project Structure](#project-structure)
 * [Architecture/Bluemix Services Implementation](#architecturebluemix-services-implementation)
 	* [Mobile Client Access Facebook Authentication](#1-mobile-client-access-facebook-authentication)
 	* [Cloudant Sync (CDTDatastore)](#2-cloudant-sync-cdtdatastore)
@@ -38,11 +38,18 @@ BluePic is a sample application for iOS that shows you how to connect your mobil
 
 [Bluemix™](https://developer.ibm.com/sso/bmregistration?lang=en_US&ca=dw-_-bluemix-_-cl-bluemixfoundry-_-article) is the latest cloud offering from IBM®. It enables organizations and developers to quickly and easily create, deploy, and manage applications on the cloud. Bluemix is an implementation of IBM's Open Cloud Architecture based on [Cloud Foundry](https://www.cloudfoundry.org/), an open source Platform as a Service (PaaS). Bluemix delivers enterprise-level services that can easily integrate with your cloud applications without you needing to know how to install or configure them.
 
-In Bluemix you should be aware that often the term “Application” is used to refer to a server component and its Bluemix services needed. It is this server component that gets deployed to Bluemix. It is not the mobile application that gets deployed, this will become clear as you go through the [Getting Started](https://github.com/IBM-MIL/BluePic/tree/develop#getting-started) guide. 
+In Bluemix you should be aware that often the term “Application” is used to refer to a server component and its Bluemix services needed. It is this server component that gets deployed to Bluemix. It is not the mobile application that gets deployed, this will become clear as you go through the [Getting Started](#getting-started) guide. 
 
 <br>
 ## Requirements
 Currently, BluePic supports Xcode 7.1.1, iOS 9+, and Swift 2. Designed for iPhone, compatible with iPad.
+
+<br>
+## Project Structure
+* `/BluePic-iOS` directory for the iOS client.
+* `/BluePic-iOS/BluePic/Configuration` directory for configuring Bluemix services keys.
+* `/NodeStarterCode` directory for the server artifact that is deployed to Bluemix.
+* `/img` directory for images for this README.
 
 <br>
 ## Getting Started
@@ -59,7 +66,7 @@ A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10
 ### 3. Create Bluemix Application and Services
 Click the "Deploy to Bluemix" button below. It will create the BluePic Bluemix application in your account and initialize the required services.
 
-<p align="center"><a href="https://bluemix.net/deploy?repository=https://github.com/rolandoasmat/MyBluemixApp.git"><img src="https://bluemix.net/deploy/button.png" alt="Deploy to Bluemix"></a></p>
+<p align="center"><a href="https://bluemix.net/deploy?repository=https://github.com/rolandoasmat/MyBluemixApp.git" target="_blank"><img src="https://bluemix.net/deploy/button.png" alt="Deploy to Bluemix"></a></p>
 
 If desired, update the app name, region, organization or space of the application (default parameters work). Click Deploy:
 <p align="center">
@@ -69,14 +76,14 @@ If desired, update the app name, region, organization or space of the applicatio
 Upon success you should see:
 <p align="center">
 <img src="img/deploy_button_success.PNG"  alt="Drawing" width=400 border=0 /></p>
-<p align="center">Figure 3: Deploy success page.</p>
+<p align="center">Figure 3: Bluemix application successfully deployed.</p>
 
-**Note:** If deploying to Bluemix fails, it will have created a faulty application on your account as well as a DevOps services (formerly known as JazzHub) project, these must be deleted manually before trying again. Steps on how to do this [here](#deploy-to-bluemix-failed).
+**Note:** If deploying to Bluemix fails, it will have created a faulty application on your account as well as a DevOps services (formerly known as JazzHub) project, these must be deleted manually before trying again. Steps on how to do this [here](#deploy-to-bluemix-failure).
 
 Next, go to your dashboard by clicking the "Dashboard" tab on the top of the page: 
 <p align="center">
 <img src="img/deploy_success_dashboard.PNG"  alt="Drawing" width=700 border=0 /></p>
-<p align="center">Figure 4: Getting back to Dashboard after successful deployment.</p>
+<p align="center">Figure 4: Getting back to dashboard after successful deployment.</p>
 
 On your dashboard the application should then become accessible, click on the Application box to open that Application Overview:
 <p align="center">
@@ -89,7 +96,7 @@ Application Overview:
 <p align="center">Figure 6: Application Overview.</p>
 
 ### 4. Connect BluePic to your Bluemix Account
-The app has to be configured with certain credentials from each of the three Bluemix services. The file `keys.plist` located in the `Configuration` directory of the BluePic Xcode project must be updated accordingly.
+The app has to be configured with certain credentials from each of the three Bluemix services. Clone the BluePic repo and open the **BluePic.xcworkspace** to get started. The file `keys.plist` located in the `Configuration` directory of the BluePic Xcode project must be updated accordingly.
 
 <p align="center">
 <img src="img/keys.PNG"  alt="Drawing" width=500 border=0 /></p>
@@ -97,15 +104,15 @@ The app has to be configured with certain credentials from each of the three Blu
 
 #### Cloudant NoSQL DB 
 
-* cdt_username: This username will be used to identify your created databases. From the Application Overview (see Figure 5 above) open the Cloudant NoSQL Instantiating Credentials by clcking on the "Show Credentials" tab of the service box:
+* `cdt_username`: This username will be used to identify your created databases. From the Application Overview (see Figure 5 above) open the Cloudant NoSQL Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
 
 <p align="center">
 <img src="img/cloudant_credentials.PNG"  alt="Drawing" width=350 border=0 /></p>
 <p align="center">Figure 8. Credentials of a Cloudant NoSQL DB service.</p>
 
-Copy the “username” credential and paste it in the "cdt_username" field of keys.plist file.
+Copy the “username” credential and paste it in the `cdt_username` field of the keys.plist file.
 
-* cdt_db\_name: This will be the name of the main Cloudant database the iOS application will use to store information. We first must go to the Cloudant Dashboard, click on the CloudantNoSQL DB icon from the Application Overview (see Figure 5 above). You will land in this page:
+* `cdt_db_name`: This will be the name of the main Cloudant database the iOS application will use to store information. We first must go to the Cloudant Dashboard, click on the CloudantNoSQL DB icon from the Application Overview (see Figure 5 above). You will land in this page:
 
 <p align="center">
 <img src="img/cloudant_landing.PNG"  alt="Drawing" width=700 border=0 /></p>
@@ -123,9 +130,9 @@ Click on "Create Database", enter a name, and click "Create":
 
 **Note:** The name must start with a letter and can only contain lowercase letters (a-z), digits (0-9) and the following characters _, $, (, ), +, -, and /.
 
-Put the name of the newly created database into the "cdt_db\_name" field of key.plist file.  
+Put the name of the newly created database into the `cdt_db_name` field of the keys.plist file.  
 
-* cdt\_key and cdt\_pass: You must generate an API Key and Password for the mobile application to access the remote database. On the database page, click on the Permissions tab:
+* `cdt_key` and `cdt_pass`: You must generate an API Key and Password for the mobile application to access the remote database. On the database page, click on the Permissions tab:
 
 <p align="center">
 <img src="img/cloudant_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
@@ -141,12 +148,12 @@ It will create a Key and Password:
 <img src="img/cloudant_api_key.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 14. Generated Key and Password.</p>
 
-Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file respectively. Also, ensure that the created API Key has Writer and Replicator permissions by checking these boxes:
+Store these values into the `cdt_key` and `cdt_pass` fields of the keys.plist file respectively. Also, ensure that the created API Key has Writer and Replicator permissions by checking these boxes:
 <p align="center">
 <img src="img/cloudant_key_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 15. Ensure the generated API Key has the correct permissions.</p>
 
-* cdt\_tests\_db\_name: The application has test cases that run on a separate database, we're storing the name of this test database here. Go through the exact same steps as done for "cdt\_db\_name" except with a different database name. Put this name into "cdt\_tests\_db\_name" field of keys.plist file. Once created, click on the "Permissions" tab of the new database. The previously generated API Key should be listed, again ensure it has Writer and Replicator permissions:
+* cdt\_tests\_db\_name: The application has test cases that run on a separate database, we're storing the name of this test database here. Go through the exact same steps as done for `cdt_db_name` except with a different database name. Put this name into `cdt_tests_db_name` field of keys.plist file. Once created, click on the "Permissions" tab of the new database.  DO NOT generate another API key for the tests database. The previously generated API Key should be listed, again ensure it has Writer and Replicator permissions:
 
 <p align="center">
 <img src="img/cloudant_test_db_permissions.PNG"  alt="Drawing" width=700 border=0 /></p>
@@ -160,11 +167,11 @@ Store these values into "cdt\_key" and "cdt\_pass" fields of keys.plist file res
 <img src="img/application_routes.PNG"  alt="Drawing" width=700 border=0 /></p>
 <p align="center">Figure 17. Routes label on Application Overview page.</p>
 
-Copy and paste this value into the "backend_route" field of keys.plist file.
+Copy and paste this value into the `backend_route` field of keys.plist file. **NOTE:** Make sure to have "http://" at the front of the pasted value. For example: `http://BluePic.bluemix.net`.
  
-* GUID: From the Application Overview (see Figure 5 above) open the Mobile Client Access Instantiating Credentials by clcking on the "Show Credentials" tab of the service box:
+* GUID: From the Application Overview (see Figure 5 above) open the Mobile Client Access Instantiating Credentials by clicking on the "Show Credentials" tab of the service box:
 
-Copy the "clientId" credential and paste into "GUID" field of keys.plist file.
+Copy the clientId credential and paste into the `GUID` field of keys.plist file.
 
 <p align="center">
 <img src="img/mobile_client_access_id.PNG"  alt="Drawing" width=300 border=0 /></p>
@@ -196,10 +203,10 @@ It will return several values:
 <img src="img/cf_cli_service_key.PNG"  alt="Drawing" width=600 border=0 /></p>
 <p align="center">Figure 20. Cloud Froundry CLI command.</p>
 
-* obj_stg\_password: Copy the "password" from CF CLI command into this field.
-* obj_stg\_user\_id: Copy the "userId" from CF CLI command into this field.
-* obj_stg\_project\_id: Copy the "projectId" from from CF CLI command into this field.
-* obj_stg\_public\_url: Copy the "projectId" from CF CLI command and append it to "https://dal.objectstorage.open.softlayer.com/v1/AUTH_" like so:
+* `obj_stg_password`: Copy the password from CF CLI command into this field.
+* `obj_stg_user_id`: Copy the userId from CF CLI command into this field.
+* `obj_stg_project_id`: Copy the projectId from from CF CLI command into this field.
+* `obj_stg_public_url`: Copy the projectId from CF CLI command and append it to "https://dal.objectstorage.open.softlayer.com/v1/AUTH_" like so:
 
 `https://dal.objectstorage.open.softlayer.com/v1/AUTH_<project_id>`
 
@@ -220,7 +227,7 @@ In order to have the app authenticate with Facebook, you must create an applicat
 1. Once you you entered the bundle ID on the Facebook quick start page, click `next`. Thats it for the Facebook quick start setup!
 1. Next go back to your Bluemix dashboard, under services click `BluePic-AdvancedMobileAccess`. On the page that shows click the `Set Up Authentication` button and then click `Facebook`. Enter your Facebook app ID you gathered from step 2 and press next. 
 
-Thats it for all the Facebook login setup. The rest of the Facebook authentication steps are already setup in the BluePic Xcode project!
+At this point, you should be able to build and run your instance of the BluePic application on Xcode!
 
 ### 6. Pre-populate Feed with Stock Photos (Optional)
 Once BluePic is configured, you should be able to upload photos and see them appear on the feed and profile. However, initially your feed will be empty. If you would like to pre-populate your feed with 3 images, simply do the following:
@@ -264,13 +271,6 @@ By tapping the third tab, you can view your profile. This shows your Facebook pr
 <p align="center">
 <img src="img/profile.PNG"  alt="Drawing" height=550 border=0 /></p>
 <p align="center">Figure 26. Profile feed.</p>
-
-<br>
-## Project Structure
-* `/BluePic-iOS` directory for the iOS client.
-* `/BluePic-iOS/BluePic/Configuration` directory for configuring Bluemix services keys.
-* `/NodeStarterCode` directory for the server artifact that is deployed to Bluemix.
-* `/img` directory for images for this README.
 
 <br>
 ## Architecture/Bluemix Services Implementation
