@@ -67,7 +67,7 @@ A free trial of Bluemix comes with 2 GB of memory and allows the use of up to 10
 ### 3. Create Bluemix Application and Services
 Click the "Deploy to Bluemix" button below. It will create the BluePic Bluemix application in your account and initialize the required services.
 
-<p align="center"><a href="https://bluemix.net/deploy?repository=https://github.com/rolandoasmat/MyBluemixApp.git" target="_blank"><img src="https://bluemix.net/deploy/button.png" alt="Deploy to Bluemix"></a></p>
+<p align="center"><a href="https://bluemix.net/deploy?repository=https://github.com/IBM-MIL/BluePic.git" target="_blank"><img src="https://bluemix.net/deploy/button.png" alt="Deploy to Bluemix"></a></p>
 
 If desired, update the app name, region, organization or space of the application (default parameters work). Click Deploy:
 <p align="center">
