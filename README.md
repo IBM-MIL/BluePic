@@ -112,4 +112,4 @@ To see more about Object Storage implementation in BluePic, go [here](https://gi
 
 
 ##Final Thoughts
-That's it! We encourage you to check out BluePic for yourself by exploring the [Github](https://github.com/IBM-MIL/BluePic) repository and cloning the project. We hope you can use BluePic as a starting point to write your own modern Swift applications using Bluemix and to create an amazing app of your own!
+That's it! We encourage you to check out BluePic for yourself by exploring the [Github](https://github.com/IBM-MIL/BluePic) repository and cloning the project. We hope you can use BluePic as a starting point to build your own modern Swift applications using Bluemix and create an amazing app of your own!
