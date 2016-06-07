@@ -1,3 +1,8 @@
+# \*\*This version of BluePic is deprecated. Please follow this [link](https://github.com/IBM-Swift/BluePic) for the latest version of BluePic\*\*
+
+
+
+
 <p align="center">
 <img src="img/banner.jpg"  alt="Drawing" border=0 />
 </p>
